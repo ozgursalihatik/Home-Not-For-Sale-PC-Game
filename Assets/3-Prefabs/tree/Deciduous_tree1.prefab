@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7502272794667764970}
   - component: {fileID: 7502272794664340682}
   - component: {fileID: 7502272794665340426}
+  - component: {fileID: 885037360917884910}
   m_Layer: 0
   m_Name: Deciduous_tree1
   m_TagString: Untagged
@@ -82,3 +83,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &885037360917884910
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7502272794667274442}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.6198807, y: 12.170593, z: 4.7383575}
+  m_Center: {x: 0.17926025, y: 5.8293533, z: 0.14657962}

@@ -17,16 +17,21 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] bool _isGround;
     [SerializeField] private GameObject _player;
-    
-    
+
+   
     void Start()
     {
         _anim = GetComponent<Animator>();
         _isGround = true;
     }
 
+    void Interact()
+    {
+        
+    }
+
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
@@ -55,6 +60,8 @@ public class PlayerMovement : MonoBehaviour
             _isGround = false;
             StartCoroutine(waitandjump());
         }
+        
+        
     }
 
     IEnumerator waitandjump()
@@ -73,5 +80,16 @@ public class PlayerMovement : MonoBehaviour
             
             
         }
+
+        if (other.gameObject.tag == "interactable1")
+        {
+            Debug.Log("Dokundu");
+            
+            Dialogue.instance.StartDialogue();
+
+        }
+        
     }
+
+   
 }
