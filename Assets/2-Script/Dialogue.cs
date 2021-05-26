@@ -8,51 +8,59 @@ public class Dialogue : MonoBehaviour
 {
     public static Dialogue instance;
     public TextMeshProUGUI textComponent;
-    public string[] lines;
+    public string[ ] lines;
     public float textSpeed;
     public GameObject textBox;
 
     private int index;
-    void Start()
+    private int tempOfText;
+    void Start ( )
     {
         instance = this;
         textBox.SetActive(false);
         textComponent.text = String.Empty;
-        
+
     }
 
     // Update is called once per frame
-    void Update()
+    void Update ( )
     {
-      
+
     }
 
-    public void StartDialogue()
+    public void StartDialogue ( )
     {
-       
+
         textBox.SetActive(true);
         //index = 0;
-        StartCoroutine(TypeLine());
+        StartCoroutine(TypeLine( ));
 
     }
 
-    IEnumerator TypeLine()
+    IEnumerator TypeLine ( )
     {
-        foreach (char c in lines[index].ToCharArray())
+        for ( int i = 0; tempOfText < lines[index].Length; tempOfText++ )
         {
+            char c = lines[index][tempOfText];
             textComponent.text += c;
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(.03f);
+            if ( tempOfText < lines[index].Length )
+            {
+                tempOfText++;
+                StartCoroutine(TypeLine( ));
+                break;
+            }
             //yield return new WaitForSeconds(textSpeed);
         }
     }
 
-    void NextLine()
+    void NextLine ( )
     {
-        if (index < lines.Length - 1)
+        if ( index < lines.Length - 1 )
         {
             //index++;
             //textComponent.text = string.Empty;
-            StartCoroutine(TypeLine());
+            StartCoroutine(TypeLine( ));
         }
         else
         {

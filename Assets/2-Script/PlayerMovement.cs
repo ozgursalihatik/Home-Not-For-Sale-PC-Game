@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -18,20 +19,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool _isGround;
     [SerializeField] private GameObject _player;
 
-   
-    void Start()
+    private bool onGrandpa = false;
+
+
+    void Start ( )
     {
-        _anim = GetComponent<Animator>();
+        _anim = GetComponent<Animator>( );
         _isGround = true;
     }
 
-    void Interact()
+    void Interact ( )
     {
-        
+
     }
 
     // Update is called once per frame
-    public void Update()
+    public void Update ( )
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
@@ -40,31 +43,29 @@ public class PlayerMovement : MonoBehaviour
 
         _controller.Move(move * _speed * Time.deltaTime);
 
-        if (move.magnitude > 0.1f)
+        if ( move.magnitude > 0.1f )
         {
             _anim.SetBool("isRun", true);
         }
         else
         {
-            _anim.SetBool("isRun",false);
+            _anim.SetBool("isRun", false);
         }
 
         velocity.y += _gravity * Time.deltaTime;
 
         _controller.Move(velocity * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && _isGround == true )
+        if ( Input.GetButtonDown("Jump") && _isGround == true )
         {
             _anim.SetBool("isJump", true);
             velocity.y = Mathf.Sqrt(_jumpheight * -2f * _gravity);
             _isGround = false;
-            StartCoroutine(waitandjump());
+            StartCoroutine(waitandjump( ));
         }
-        
-        
     }
 
-    IEnumerator waitandjump()
+    IEnumerator waitandjump ( )
     {
         yield return new WaitForSeconds(1f);
         _isGround = true;
@@ -72,24 +73,24 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter ( Collider other )
     {
-        if (other.gameObject.tag == "Touch")
+        if ( other.gameObject.tag == "Touch" )
         {
             _anim.SetBool("inTouch", true);
-            
-            
+
+
         }
 
-        if (other.gameObject.tag == "interactable1")
+        if ( other.gameObject.tag == "interactable1" && !onGrandpa )
         {
             Debug.Log("Dokundu");
-            
-            Dialogue.instance.StartDialogue();
 
+            Dialogue.instance.StartDialogue( );
+            onGrandpa = true;
         }
-        
+
     }
 
-   
+
 }
