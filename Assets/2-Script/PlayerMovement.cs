@@ -20,12 +20,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject _player;
 
     private bool onGrandpa = false;
+    [SerializeField] private bool canMove;
+    
 
 
     void Start ( )
     {
         _anim = GetComponent<Animator>( );
         _isGround = true;
+        canMove = true;
     }
 
     void Interact ( )
@@ -36,33 +39,37 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     public void Update ( )
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * x + transform.forward * z;
-
-        _controller.Move(move * _speed * Time.deltaTime);
-
-        if ( move.magnitude > 0.1f )
+        if (canMove == true)
         {
-            _anim.SetBool("isRun", true);
-        }
-        else
-        {
-            _anim.SetBool("isRun", false);
-        }
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
 
-        velocity.y += _gravity * Time.deltaTime;
+            Vector3 move = transform.right * x + transform.forward * z;
 
-        _controller.Move(velocity * Time.deltaTime);
+            _controller.Move(move * _speed * Time.deltaTime);
 
-        if ( Input.GetButtonDown("Jump") && _isGround == true )
-        {
-            _anim.SetBool("isJump", true);
-            velocity.y = Mathf.Sqrt(_jumpheight * -2f * _gravity);
-            _isGround = false;
-            StartCoroutine(waitandjump( ));
+            if ( move.magnitude > 0.1f )
+            {
+                _anim.SetBool("isRun", true);
+            }
+            else
+            {
+                _anim.SetBool("isRun", false);
+            }
+
+            velocity.y += _gravity * Time.deltaTime;
+
+            _controller.Move(velocity * Time.deltaTime);
+
+            if ( Input.GetButtonDown("Jump") && _isGround == true )
+            {
+                _anim.SetBool("isJump", true);
+                velocity.y = Mathf.Sqrt(_jumpheight * -2f * _gravity);
+                _isGround = false;
+                StartCoroutine(waitandjump( ));
+            }
         }
+       
     }
 
     IEnumerator waitandjump ( )
@@ -88,6 +95,7 @@ public class PlayerMovement : MonoBehaviour
 
             Dialogue.instance.StartDialogue( );
             onGrandpa = true;
+            canMove = false;
         }
 
     }
