@@ -2,31 +2,31 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
-    public static Dialogue instance;
-    public TextMeshProUGUI textComponent;
+    public static Dialogue Instance;
+
+    public TMP_Text textComponent;
     public string[ ] lines;
     public float textDuration;
     public GameObject textBox;
+    public Button NextDialogueButton;
 
     private int index;
     private int tempOfText;
     void Start ( )
     {
-        instance = this;
+        Instance = this;
         textBox.SetActive(false);
         textComponent.text = String.Empty;
 
     }
-    void Update ( )
+    private void OnMouseDown ( )
     {
-        if ( Input.GetMouseButtonDown(0) )
-        {
-
-        }
+        
     }
     public void StartDialogue ( )
     {
@@ -61,9 +61,5 @@ public class Dialogue : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-    }
-    private void OnMouseDown ( )
-    {
-        
     }
 }

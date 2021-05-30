@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     public float _speed = 12f;
     public float _gravity = -9.81f;
     public float _jumpheight = 10f;
+    public bool onGrandpa = false,
+        secondDialogue = false,
+        thirdDialogue = false;
 
     private Vector3 velocity;
 
@@ -23,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool _isGround;
     [SerializeField] private GameObject _player;
 
-    public bool onGrandpa = false;
     [SerializeField] private bool canMove;
 
     private void Awake ( )
@@ -91,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
         if ( other.gameObject.CompareTag("Grandpa") && !onGrandpa )
         {
             PrefsManager.AutoSave( );
-            Dialogue.instance.StartDialogue( );
+            Dialogue.Instance.StartDialogue( );
             onGrandpa = true;
             canMove = false;
         }
