@@ -6,8 +6,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance;
+
     public CharacterController _controller;
 
+    public static Vector3 Position { get => Instance.transform.position; set => Instance.transform.position = value; }
+    public static Quaternion Rotation { get => Instance.transform.rotation; set => Instance.transform.rotation = value; }
     public float _speed = 12f;
     public float _gravity = -9.81f;
     public float _jumpheight = 10f;
@@ -19,11 +23,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool _isGround;
     [SerializeField] private GameObject _player;
 
-    private bool onGrandpa = false;
+    public bool onGrandpa = false;
     [SerializeField] private bool canMove;
-    
 
-
+    private void Awake ( )
+    {
+        Instance = this;
+    }
     void Start ( )
     {
         _anim = GetComponent<Animator>( );
@@ -31,45 +37,40 @@ public class PlayerMovement : MonoBehaviour
         canMove = true;
     }
 
-    void Interact ( )
-    {
-
-    }
-
     // Update is called once per frame
     public void Update ( )
     {
-        if (canMove == true)
+
+        if ( !canMove )
+            return;
+
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        Vector3 move = transform.right * x + transform.forward * z;
+
+        _controller.Move(move * _speed * Time.deltaTime);
+
+        if ( move.magnitude > 0.1f )
         {
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
-
-            Vector3 move = transform.right * x + transform.forward * z;
-
-            _controller.Move(move * _speed * Time.deltaTime);
-
-            if ( move.magnitude > 0.1f )
-            {
-                _anim.SetBool("isRun", true);
-            }
-            else
-            {
-                _anim.SetBool("isRun", false);
-            }
-
-            velocity.y += _gravity * Time.deltaTime;
-
-            _controller.Move(velocity * Time.deltaTime);
-
-            if ( Input.GetButtonDown("Jump") && _isGround == true )
-            {
-                _anim.SetBool("isJump", true);
-                velocity.y = Mathf.Sqrt(_jumpheight * -2f * _gravity);
-                _isGround = false;
-                StartCoroutine(waitandjump( ));
-            }
+            _anim.SetBool("isRun", true);
         }
-       
+        else
+        {
+            _anim.SetBool("isRun", false);
+        }
+
+        velocity.y += _gravity * Time.deltaTime;
+
+        _controller.Move(velocity * Time.deltaTime);
+
+        if ( Input.GetButtonDown("Jump") && _isGround == true )
+        {
+            _anim.SetBool("isJump", true);
+            velocity.y = Mathf.Sqrt(_jumpheight * -2f * _gravity);
+            _isGround = false;
+            StartCoroutine(waitandjump( ));
+        }
     }
 
     IEnumerator waitandjump ( )
@@ -85,14 +86,11 @@ public class PlayerMovement : MonoBehaviour
         if ( other.gameObject.tag == "Touch" )
         {
             _anim.SetBool("inTouch", true);
-
-
         }
 
-        if ( other.gameObject.tag == "interactable1" && !onGrandpa )
+        if ( other.gameObject.CompareTag("Grandpa") && !onGrandpa )
         {
-            Debug.Log("Dokundu");
-
+            PrefsManager.AutoSave( );
             Dialogue.instance.StartDialogue( );
             onGrandpa = true;
             canMove = false;

@@ -9,7 +9,7 @@ public class Dialogue : MonoBehaviour
     public static Dialogue instance;
     public TextMeshProUGUI textComponent;
     public string[ ] lines;
-    public float textSpeed;
+    public float textDuration;
     public GameObject textBox;
 
     private int index;
@@ -21,40 +21,35 @@ public class Dialogue : MonoBehaviour
         textComponent.text = String.Empty;
 
     }
-
-    // Update is called once per frame
     void Update ( )
     {
+        if ( Input.GetMouseButtonDown(0) )
+        {
 
+        }
     }
-
     public void StartDialogue ( )
     {
-
         textBox.SetActive(true);
-        //index = 0;
         StartCoroutine(TypeLine( ));
-
     }
-
     IEnumerator TypeLine ( )
     {
-        for ( int i = 0; tempOfText < lines[index].Length; tempOfText++ )
+        for ( tempOfText = 0; tempOfText < lines[index].Length; tempOfText++ )
         {
             char c = lines[index][tempOfText];
             textComponent.text += c;
-            yield return new WaitForSeconds(.03f);
+            yield return new WaitForSeconds(textDuration);
             if ( tempOfText < lines[index].Length )
             {
                 tempOfText++;
                 StartCoroutine(TypeLine( ));
                 break;
             }
-            //yield return new WaitForSeconds(textSpeed);
         }
     }
 
-    void NextLine ( )
+    private void NextLine ( )
     {
         if ( index < lines.Length - 1 )
         {
@@ -66,5 +61,9 @@ public class Dialogue : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+    }
+    private void OnMouseDown ( )
+    {
+        
     }
 }
