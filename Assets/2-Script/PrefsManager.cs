@@ -34,13 +34,14 @@ public class PrefsManager : MonoBehaviour
     }
     private void InitializePrefs ( )
     {
-        if ( PlayerPrefs.HasKey("onGrandpa") )
+        if ( PlayerPrefs.HasKey("GameSession") )
         {
-            prefs.onGrandpa = PlayerPrefs.GetInt("onGrandpa") == 1;
+            prefs.CurrentSession = 0;
+            PlayerPrefs.SetInt("GameSession", 0);
         }
         else
         {
-            PlayerPrefs.SetInt("onGrandpa", 0);
+            prefs.CurrentSession = (GameSessions)PlayerPrefs.GetInt("GameSession");
         }
 
         if ( PlayerPrefs.HasKey("PosX") )
@@ -84,7 +85,7 @@ public class PrefsManager : MonoBehaviour
     {
         PlayerMovement.Position = prefs.lastPos;
         PlayerMovement.Rotation = prefs.lastRot;
-        PlayerMovement.Instance.onGrandpa = prefs.onGrandpa;
+        EventManager.CurrentSession = prefs.CurrentSession;
     }
     private void Update ( )
     {
@@ -92,9 +93,10 @@ public class PrefsManager : MonoBehaviour
         prefs.lastRot = PlayerMovement.Rotation;
     }
 }
+
 public class Prefs
 {
-    public bool onGrandpa;
+    public GameSessions CurrentSession;
     public Vector3 lastPos;
     public Quaternion lastRot;
 }

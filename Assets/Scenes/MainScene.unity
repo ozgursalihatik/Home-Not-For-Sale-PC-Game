@@ -5686,7 +5686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d30dc8a639079644ae2c2e5853e9e27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textComponent: {fileID: 1533954335}
+  dialogueText: {fileID: 1533954335}
   lines:
   - "Anan\u0131n am\u0131"
   - 2
@@ -19940,7 +19940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 0125309e38bea8a48bc578cf8f220634, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 116.6
+      value: 117.83
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 0125309e38bea8a48bc578cf8f220634, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19948,7 +19948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 0125309e38bea8a48bc578cf8f220634, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.55
+      value: 25.96
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 0125309e38bea8a48bc578cf8f220634, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20371,7 +20371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2b5ad323f2fd6814a8017c2093799238, type: 3}
       propertyPath: m_LocalScale.x
-      value: 13.242829
+      value: 13.369961
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2b5ad323f2fd6814a8017c2093799238, type: 3}
       propertyPath: m_LocalScale.y
@@ -20383,7 +20383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2b5ad323f2fd6814a8017c2093799238, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.06
+      value: 26.1152
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2b5ad323f2fd6814a8017c2093799238, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21070,7 +21070,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &2009182444
 BoxCollider:
   m_ObjectHideFlags: 0

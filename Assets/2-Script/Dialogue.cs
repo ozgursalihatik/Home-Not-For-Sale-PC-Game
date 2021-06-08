@@ -9,8 +9,8 @@ public class Dialogue : MonoBehaviour
 {
     public static Dialogue Instance;
 
-    public TMP_Text textComponent;
-    public string[ ] lines;
+    public TMP_Text dialogueText;
+    public List<string> lines;
     public float textDuration;
     public GameObject textBox;
     public Button NextDialogueButton;
@@ -21,24 +21,27 @@ public class Dialogue : MonoBehaviour
     {
         Instance = this;
         textBox.SetActive(false);
-        textComponent.text = String.Empty;
+        dialogueText.text = string.Empty;
 
     }
     private void OnMouseDown ( )
     {
-        
+
     }
-    public void StartDialogue ( )
+    public void StartDialogue ( object Owner )
     {
-        textBox.SetActive(true);
-        StartCoroutine(TypeLine( ));
+        if ( Owner.Equals(typeof(Grandpa)) )
+        {
+            textBox.SetActive(true);
+            StartCoroutine(TypeLine( ));
+        }
     }
     IEnumerator TypeLine ( )
     {
         for ( tempOfText = 0; tempOfText < lines[index].Length; tempOfText++ )
         {
             char c = lines[index][tempOfText];
-            textComponent.text += c;
+            dialogueText.text += c;
             yield return new WaitForSeconds(textDuration);
             if ( tempOfText < lines[index].Length )
             {
@@ -49,9 +52,14 @@ public class Dialogue : MonoBehaviour
         }
     }
 
+    public void Continue ( )
+    {
+
+    }
+
     private void NextLine ( )
     {
-        if ( index < lines.Length - 1 )
+        if ( index < lines.Count - 1 )
         {
             //index++;
             //textComponent.text = string.Empty;

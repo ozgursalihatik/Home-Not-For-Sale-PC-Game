@@ -12,14 +12,13 @@ public class PlayerMovement : MonoBehaviour
 
     public static Vector3 Position { get => Instance.transform.position; set => Instance.transform.position = value; }
     public static Quaternion Rotation { get => Instance.transform.rotation; set => Instance.transform.rotation = value; }
+
     public float _speed = 12f;
     public float _gravity = -9.81f;
     public float _jumpheight = 10f;
-    public bool onGrandpa = false,
-        secondDialogue = false,
-        thirdDialogue = false;
 
     private Vector3 velocity;
+    private GameSessions currentSession { get => EventManager.CurrentSession; }
 
     public Animator _anim;
 
@@ -39,10 +38,8 @@ public class PlayerMovement : MonoBehaviour
         canMove = true;
     }
 
-    // Update is called once per frame
     public void Update ( )
     {
-
         if ( !canMove )
             return;
 
@@ -74,15 +71,12 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(waitandjump( ));
         }
     }
-
     IEnumerator waitandjump ( )
     {
         yield return new WaitForSeconds(1f);
         _isGround = true;
         _anim.SetBool("isJump", false);
     }
-
-
     private void OnTriggerEnter ( Collider other )
     {
         if ( other.gameObject.tag == "Touch" )
@@ -90,15 +84,12 @@ public class PlayerMovement : MonoBehaviour
             _anim.SetBool("inTouch", true);
         }
 
-        if ( other.gameObject.CompareTag("Grandpa") && !onGrandpa )
+        if ( other.gameObject.CompareTag("Grandpa") && !currentSession.Equals(GameSessions.Grandpa) )
         {
             PrefsManager.AutoSave( );
-            Dialogue.Instance.StartDialogue( );
-            onGrandpa = true;
+            //Dialogue.Instance.StartDialogue( );
+            EventManager.CurrentSession = GameSessions.Grandpa;
             canMove = false;
         }
-
     }
-
-
 }
