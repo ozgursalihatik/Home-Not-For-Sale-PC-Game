@@ -20,6 +20,9 @@ public class PrefsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    private void Start ( )
+    {
         InitializePrefs( );
         isInitialized = PlayerPrefs.HasKey("PosX");
     }
@@ -34,7 +37,8 @@ public class PrefsManager : MonoBehaviour
     }
     private void InitializePrefs ( )
     {
-        if ( PlayerPrefs.HasKey("GameSession") )
+        prefs = new Prefs( );
+        if ( !PlayerPrefs.HasKey("GameSession") )
         {
             prefs.CurrentSession = 0;
             PlayerPrefs.SetInt("GameSession", 0);
@@ -89,8 +93,6 @@ public class PrefsManager : MonoBehaviour
     }
     private void Update ( )
     {
-        prefs.lastPos = PlayerMovement.Position;
-        prefs.lastRot = PlayerMovement.Rotation;
     }
 }
 

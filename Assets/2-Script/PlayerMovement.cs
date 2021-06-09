@@ -84,12 +84,14 @@ public class PlayerMovement : MonoBehaviour
             _anim.SetBool("inTouch", true);
         }
 
-        if ( other.gameObject.CompareTag("Grandpa") && !currentSession.Equals(GameSessions.Grandpa) )
+        if ( other.gameObject.TryGetComponent(out Grandpa grandpa) )
         {
             PrefsManager.AutoSave( );
-            //Dialogue.Instance.StartDialogue( );
+            Dialogue.StartDialogueStatic(grandpa.Message.Messages[grandpa.MessageNumber]);
             EventManager.CurrentSession = GameSessions.Grandpa;
             canMove = false;
+            EventManager.GameIsLive = false;
+            Cursor.lockState = CursorLockMode.Confined;
         }
     }
 }

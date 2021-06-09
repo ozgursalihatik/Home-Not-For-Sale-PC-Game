@@ -10,64 +10,54 @@ public class Dialogue : MonoBehaviour
     public static Dialogue Instance;
 
     public TMP_Text dialogueText;
-    public List<string> lines;
     public float textDuration;
     public GameObject textBox;
     public Button NextDialogueButton;
+    public DialogueMessages OzgursMessages;
 
+    private string tempMessage;
     private int index;
     private int tempOfText;
+    private float timer;
+    private bool isWritin;
     void Start ( )
     {
         Instance = this;
         textBox.SetActive(false);
         dialogueText.text = string.Empty;
-
+        Application.targetFrameRate = 60;
     }
-    private void OnMouseDown ( )
+    private void Update ( )
     {
-
-    }
-    public void StartDialogue ( object Owner )
-    {
-        if ( Owner.Equals(typeof(Grandpa)) )
+        if ( isWritin )
         {
-            textBox.SetActive(true);
-            StartCoroutine(TypeLine( ));
-        }
-    }
-    IEnumerator TypeLine ( )
-    {
-        for ( tempOfText = 0; tempOfText < lines[index].Length; tempOfText++ )
-        {
-            char c = lines[index][tempOfText];
-            dialogueText.text += c;
-            yield return new WaitForSeconds(textDuration);
-            if ( tempOfText < lines[index].Length )
+            timer -= Time.deltaTime;
+            if ( timer <= 0 )
             {
+                timer += textDuration;
                 tempOfText++;
-                StartCoroutine(TypeLine( ));
-                break;
+                dialogueText.text = tempMessage.Substring(0, tempOfText);
+                if ( tempOfText >= tempMessage.Length - 1 )
+                {
+                    isWritin = false;
+                    return;
+                }
             }
         }
     }
-
-    public void Continue ( )
+    public static void StartDialogueStatic ( string Message )
     {
-
+        Instance.StartDialogue(Message);
     }
-
-    private void NextLine ( )
+    public void ContinueDialogue()
     {
-        if ( index < lines.Count - 1 )
-        {
-            //index++;
-            //textComponent.text = string.Empty;
-            StartCoroutine(TypeLine( ));
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
+        
+        isWritin = true;
+    }
+    private void StartDialogue ( string message )
+    {
+        textBox.SetActive(true);
+        tempMessage = message;
+        isWritin = true;
     }
 }

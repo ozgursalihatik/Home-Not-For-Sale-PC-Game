@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Dialogue")]
 public class DialogueMessages : ScriptableObject
 {
-    [TextArea(1, 5)]
+    [TextArea(1, 10)]
     [SerializeField] public List<string> Messages;
     [SerializeField] public Owners Owner;
 }

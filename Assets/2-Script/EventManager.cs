@@ -5,7 +5,7 @@ using UnityEngine;
 public class EventManager : MonoBehaviour
 {
     public static EventManager Instance;
-
+    public static bool GameIsLive;
     public static GameSessions CurrentSession
     {
         get
@@ -18,17 +18,9 @@ public class EventManager : MonoBehaviour
         }
     }
     public GameSessions _currentSession;
-
-    private void Start ( )
+    private void Awake ( )
     {
-
+        Instance = this;
+        GameIsLive = true;
     }
-}
-public enum GameSessions
-{
-    First = 0,
-    Grandpa = 1,
-    Coop = 2,
-    Garage = 3,
-    End = 4
 }

@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+
 using Unity.Mathematics;
+
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -21,32 +23,35 @@ public class ThirdPersonMovement : MonoBehaviour
     private Animator anim;
 
     public bool canJump;
-    private void Start()
+    private void Start ( )
     {
-        anim = GetComponent<Animator>();
-        controller = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>( );
+        controller = GetComponent<CharacterController>( );
 
         canJump = true;
     }
 
 
     // Update is called once per frame
-    private void Update()
+    private void Update ( )
     {
+        if ( !EventManager.GameIsLive )
+            return;
+
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (direction.magnitude >= 0.1f)
+        if ( direction.magnitude >= 0.1f )
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,
                 turnSmoothTime);
-            transform.rotation =Quaternion.Euler(0f, angle, 0f);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir * speed * Time.deltaTime);
-            
+
             anim.SetBool("isRun", true);
 
             controller.SimpleMove(moveDir);
@@ -56,35 +61,29 @@ public class ThirdPersonMovement : MonoBehaviour
             anim.SetBool("isRun", false);
         }
 
-        if (Input.GetButtonDown("Jump") && controller.isGrounded && canJump == true)
+        if ( Input.GetButtonDown("Jump") && controller.isGrounded && canJump == true )
         {
             moveDirection.y = jumpSpeed;
             anim.SetBool("isAir", true);
-            StartCoroutine(WaitandChangeAnimation());
-            StartCoroutine(WaitandTrue());
+            StartCoroutine(WaitandChangeAnimation( ));
+            StartCoroutine(WaitandTrue( ));
         }
 
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
 
     }
-    
-    IEnumerator WaitandChangeAnimation()
+
+    IEnumerator WaitandChangeAnimation ( )
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame( );
         anim.SetBool("isAir", false);
         canJump = false;
     }
-    
-    IEnumerator WaitandTrue()
+
+    IEnumerator WaitandTrue ( )
     {
         yield return new WaitForSeconds(2);
         canJump = true;
     }
-
-    
- 
-    
-
-   
 }

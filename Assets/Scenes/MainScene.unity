@@ -1787,6 +1787,7 @@ GameObject:
   - component: {fileID: 153630944}
   - component: {fileID: 153630943}
   - component: {fileID: 153630942}
+  - component: {fileID: 153630946}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1876,6 +1877,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &153630946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153630941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c9e62c58069d64a96ace134e5093dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &156592316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5687,14 +5700,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 1533954335}
-  lines:
-  - "Anan\u0131n am\u0131"
-  - 2
-  - 3
-  - 4
-  textDuration: 0
+  textDuration: 0.5
   textBox: {fileID: 587937459}
   NextDialogueButton: {fileID: 2041087063}
+  OzgursMessages: {fileID: 11400000, guid: e8a81c658c2e1694b8c617b6c06495f7, type: 2}
 --- !u!114 &587937462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7823,6 +7832,7 @@ GameObject:
   - component: {fileID: 850528606}
   - component: {fileID: 850528605}
   - component: {fileID: 850528604}
+  - component: {fileID: 850528607}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -7878,6 +7888,19 @@ Transform:
   m_Father: {fileID: 153630945}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &850528607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850528603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168afda4a1ec00747b7670e92ef93961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentSession: 0
 --- !u!1001 &866585219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21064,9 +21087,10 @@ GameObject:
   - component: {fileID: 2009182446}
   - component: {fileID: 2009182445}
   - component: {fileID: 2009182444}
+  - component: {fileID: 2009182448}
   m_Layer: 3
   m_Name: Cube
-  m_TagString: interactable1
+  m_TagString: Grandpa
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21147,6 +21171,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -32.563, z: 0}
+--- !u!114 &2009182448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009182443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f460ee7612e87954e8a43678ba4572af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MessageNumber: 0
+  Message: {fileID: 11400000, guid: 73c13908ad235754880c445e2dc8bd67, type: 2}
 --- !u!1 &2019644895
 GameObject:
   m_ObjectHideFlags: 0
@@ -21615,13 +21653,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 587937459}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 587937461}
+        m_TargetAssemblyTypeName: Dialogue, Assembly-CSharp
+        m_MethodName: Continue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
