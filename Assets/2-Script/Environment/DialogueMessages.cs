@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+[System.Serializable]
 [CreateAssetMenu(menuName = "Dialogue")]
 public class DialogueMessages : ScriptableObject
 {
     [TextArea(1, 10)]
     [SerializeField] public List<string> Messages;
-    [SerializeField] public Owners Owner;
+    [SerializeField] public List<Owners> owners;
+    [SerializeField] public int Index;
 }
 public enum Owners
 {
-    Grandpa = 0,
-    Grandma = 1,
-    test = 2,
-    test1 = 3,
-    test2 = 4
+    Ozgur = 0,
+    Grandpa = 1,
+    Grandma = 2
 }

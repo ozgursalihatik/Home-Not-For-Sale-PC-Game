@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private bool canMove;
 
+    private bool temp = true;
+
     private void Awake ( )
     {
         Instance = this;
@@ -84,14 +86,34 @@ public class PlayerMovement : MonoBehaviour
             _anim.SetBool("inTouch", true);
         }
 
-        if ( other.gameObject.TryGetComponent(out Grandpa grandpa) )
+        if ( other.gameObject.TryGetComponent(out Grandpa grandpa) && temp )
         {
             PrefsManager.AutoSave( );
-            Dialogue.StartDialogueStatic(grandpa.Message.Messages[grandpa.MessageNumber]);
+            Dialogue.StartDialogueStatic(grandpa.Message);
             EventManager.CurrentSession = GameSessions.Grandpa;
             canMove = false;
             EventManager.GameIsLive = false;
             Cursor.lockState = CursorLockMode.Confined;
+            temp = false;
+            StartCoroutine(tempDelay( ));
         }
+    }
+    public static void SetMovelable ( bool state )
+    {
+        Instance.canMove = state;
+        EventManager.GameIsLive = state;
+        if (state)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+    }
+    public IEnumerator tempDelay ( )
+    {
+        yield return new WaitForSeconds(.5f);
+        temp = true;
     }
 }

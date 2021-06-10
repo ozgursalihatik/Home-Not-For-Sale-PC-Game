@@ -9,7 +9,7 @@ public class Dialogue : MonoBehaviour
 {
     public static Dialogue Instance;
 
-    public TMP_Text dialogueText;
+    public TMP_Text dialogueText, nameText;
     public float textDuration;
     public GameObject textBox;
     public Button NextDialogueButton;
@@ -45,19 +45,39 @@ public class Dialogue : MonoBehaviour
             }
         }
     }
-    public static void StartDialogueStatic ( string Message )
+    public static void StartDialogueStatic ( DialogueMessages message )
     {
-        Instance.StartDialogue(Message);
+        Instance.StartDialogue(message);
     }
-    public void ContinueDialogue()
+    public void ContinueDialogue ( )
     {
-        
-        isWritin = true;
+        if(OzgursMessages.Index<OzgursMessages.Messages.Count)
+        {
+            timer = 0;
+            OzgursMessages.Index++;
+            isWritin = true;
+        }
+        else
+        {
+            textBox.SetActive(false);
+            dialogueText.text = string.Empty;
+            return;
+        }
     }
-    private void StartDialogue ( string message )
+    private void StartDialogue ( DialogueMessages messages )
     {
-        textBox.SetActive(true);
-        tempMessage = message;
-        isWritin = true;
+        if(messages.Index < messages.Messages.Count )
+        {
+            textBox.SetActive(true);
+            messages.Index++;
+            isWritin = true;
+        }
+        else
+        {
+            textBox.SetActive(false);
+            tempMessage = string.Empty;
+            dialogueText.text = string.Empty;
+            return;
+        }
     }
 }
