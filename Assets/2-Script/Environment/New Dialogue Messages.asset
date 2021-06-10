@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: New Dialogue Messages
   m_EditorClassIdentifier: 
   Messages: []
-  Owner: 0
+  owners: 
   Index: 0

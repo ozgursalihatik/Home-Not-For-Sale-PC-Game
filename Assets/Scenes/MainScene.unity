@@ -5705,7 +5705,7 @@ MonoBehaviour:
   textDuration: 0.01
   textBox: {fileID: 587937459}
   NextDialogueButton: {fileID: 2041087063}
-  OzgursMessages: {fileID: 11400000, guid: e8a81c658c2e1694b8c617b6c06495f7, type: 2}
+  OzgursMessages: {fileID: 0}
 --- !u!114 &587937462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21320,7 +21320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MessageNumber: 0
-  Message: {fileID: 11400000, guid: 73c13908ad235754880c445e2dc8bd67, type: 2}
+  Message: {fileID: 0}
   npcName: 
 --- !u!1 &2019644895
 GameObject:
@@ -21792,7 +21792,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 587937461}
         m_TargetAssemblyTypeName: Dialogue, Assembly-CSharp
-        m_MethodName: Continue
+        m_MethodName: ContinueDialogue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
