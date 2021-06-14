@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35cf85bd1f548634881cda069a970b3b, type: 3}
-  m_Name: New Dialogue Messages
+  m_Name: Session 4
   m_EditorClassIdentifier: 
-  Messages: []
-  owners: 
+  Messages:
+  - "Oyun oynamaya dalmadan \xF6nce deden garaj\u0131n kapal\u0131 kap\u0131s\u0131n\u0131
+    a\xE7m\u0131\u015Ft\u0131r oray\u0131 toparlar m\u0131s\u0131n biraz?"
+  - Elbette.
+  owners: 0200000000000000
   Index: 0

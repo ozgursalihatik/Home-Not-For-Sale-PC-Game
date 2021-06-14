@@ -18,14 +18,14 @@ public class PlayerMovement : MonoBehaviour
     public float _jumpheight = 10f;
 
     private Vector3 velocity;
-    private GameSessions currentSession { get => EventManager.CurrentSession; }
+    private int SessionNumber { get => EventManager.SessionNumber; }
 
     public Animator _anim;
 
     [SerializeField] bool _isGround;
     [SerializeField] private GameObject _player;
 
-    [SerializeField] private bool canMove;
+    [SerializeField] public bool canMove;
 
     private bool temp = true;
 
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
     }
     IEnumerator waitandjump ( )
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         _isGround = true;
         _anim.SetBool("isJump", false);
     }
@@ -86,11 +86,11 @@ public class PlayerMovement : MonoBehaviour
             _anim.SetBool("inTouch", true);
         }
 
-        if ( other.gameObject.TryGetComponent(out Grandpa grandpa) && temp )
+        if ( other.gameObject.TryGetComponent(out Member member) && temp && EventManager.SessionNumber <= 0 )
         {
             PrefsManager.AutoSave( );
-            Dialogue.StartDialogueStatic(grandpa.Message);
-            EventManager.CurrentSession = GameSessions.Grandpa;
+            Dialogue.StartDialogueStatic(member.MemberIndex);
+            EventManager.SessionNumber = 0;
             canMove = false;
             EventManager.GameIsLive = false;
             Cursor.lockState = CursorLockMode.Confined;
@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Instance.canMove = state;
         EventManager.GameIsLive = state;
-        if (state)
+        if ( state )
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public IEnumerator tempDelay ( )
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(5f);
         temp = true;
     }
 }

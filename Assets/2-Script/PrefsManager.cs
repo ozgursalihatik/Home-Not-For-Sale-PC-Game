@@ -24,16 +24,42 @@ public class PrefsManager : MonoBehaviour
     private void Start ( )
     {
         InitializePrefs( );
-        isInitialized = PlayerPrefs.HasKey("PosX");
+        isInitialized = PlayerPrefs.HasKey("GameSession");
+        Load( );
+
     }
     public static void AutoSave ( )
     {
-        Instance.InitializePrefs( );
+        Instance.Save( );
         isInitialized = PlayerPrefs.HasKey("PosX");
     }
     public static void Load ( )
     {
         Instance.ApplyPrefs( );
+    }
+    private void Save ( )
+    {
+        PlayerPrefs.SetInt("GameSession", EventManager.SessionNumber);
+        prefs.CurrentSession = PlayerPrefs.GetInt("GameSession");
+
+
+        PlayerPrefs.SetFloat("PosX", PlayerMovement.Position.x);
+        PlayerPrefs.SetFloat("PosY", PlayerMovement.Position.y);
+        PlayerPrefs.SetFloat("PosZ", PlayerMovement.Position.z);
+
+        prefs.lastPos = new Vector3(PlayerPrefs.GetFloat("PosX"),
+                                    PlayerPrefs.GetFloat("PosY"),
+                                    PlayerPrefs.GetFloat("PosZ"));
+
+        PlayerPrefs.SetFloat("RotX", PlayerMovement.Rotation.x);
+        PlayerPrefs.SetFloat("RotY", PlayerMovement.Rotation.y);
+        PlayerPrefs.SetFloat("RotZ", PlayerMovement.Rotation.z);
+        PlayerPrefs.SetFloat("RotW", PlayerMovement.Rotation.w);
+
+        prefs.lastRot = new Quaternion(PlayerPrefs.GetFloat("RotX"),
+                                       PlayerPrefs.GetFloat("RotY"),
+                                       PlayerPrefs.GetFloat("RotZ"),
+                                       PlayerPrefs.GetFloat("RotW"));
     }
     private void InitializePrefs ( )
     {
@@ -45,7 +71,7 @@ public class PrefsManager : MonoBehaviour
         }
         else
         {
-            prefs.CurrentSession = (GameSessions)PlayerPrefs.GetInt("GameSession");
+            prefs.CurrentSession = PlayerPrefs.GetInt("GameSession");
         }
 
         if ( PlayerPrefs.HasKey("PosX") )
@@ -89,16 +115,13 @@ public class PrefsManager : MonoBehaviour
     {
         PlayerMovement.Position = prefs.lastPos;
         PlayerMovement.Rotation = prefs.lastRot;
-        EventManager.CurrentSession = prefs.CurrentSession;
-    }
-    private void Update ( )
-    {
+        EventManager.SessionNumber = prefs.CurrentSession;
     }
 }
 
 public class Prefs
 {
-    public GameSessions CurrentSession;
+    public int CurrentSession;
     public Vector3 lastPos;
     public Quaternion lastRot;
 }

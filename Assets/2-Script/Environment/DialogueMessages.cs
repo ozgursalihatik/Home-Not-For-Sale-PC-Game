@@ -9,12 +9,12 @@ public class DialogueMessages : ScriptableObject
 {
     [TextArea(1, 10)]
     [SerializeField] public List<string> Messages;
-    [SerializeField] public List<Owners> owners;
+    [SerializeField] public List<Members> owners;
     [SerializeField] public int Index;
 }
-public enum Owners
+public enum Members
 {
     Ozgur = 0,
-    Grandpa = 1,
-    Grandma = 2
+    Dede = 1,
+    Babaanne = 2
 }

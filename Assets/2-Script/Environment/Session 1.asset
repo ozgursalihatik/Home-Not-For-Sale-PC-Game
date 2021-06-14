@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35cf85bd1f548634881cda069a970b3b, type: 3}
+  m_Name: Session 1
+  m_EditorClassIdentifier: 
+  Messages:
+  - "Ho\u015F geldin \xD6zg\xFCr, yolculu\u011Fun nas\u0131l ge\xE7ti?"
+  - "Gayet e\u011Flenceliydi."
+  - "Muhtemelen burada yolda e\u011Flendi\u011Finden daha fazla e\u011Fleneceksin.
+    Bu arada\u202Fsenden\u202F bir\u202Fyard\u0131m isteyece\u011Fim. Hemen trakt\xF6r\xFCn
+    park edildi\u011Fi \u015Fu alanda \xE7eki\xE7 olacak, onu bana getirebilir misin?"
+  - Olur tabii. ^^
+  owners: 01000000000000000100000000000000
+  Index: 0

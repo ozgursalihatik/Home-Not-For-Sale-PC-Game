@@ -11,19 +11,20 @@ public class Dialogue : MonoBehaviour
 
     public TMP_Text dialogueText, nameText;
     public float textDuration;
-    public GameObject textBox;
-    public Button NextDialogueButton;
-    public DialogueMessages OzgursMessages;
+    public GameObject DialogueBox;
+    public List<DialogueMessages> Dialogues;
 
-    private string tempMessage;
-    private int index;
+    private string tempMessage, tempMember;
     private int tempOfText;
     private float timer;
     private bool isWritin;
-    void Start ( )
+    private void Awake ( )
     {
         Instance = this;
-        textBox.SetActive(false);
+    }
+    void Start ( )
+    {
+        DialogueBox.SetActive(false);
         dialogueText.text = string.Empty;
         Application.targetFrameRate = 60;
     }
@@ -37,46 +38,44 @@ public class Dialogue : MonoBehaviour
                 timer += textDuration;
                 tempOfText++;
                 dialogueText.text = tempMessage.Substring(0, tempOfText);
-                if ( tempOfText >= tempMessage.Length - 1 )
+                nameText.text = tempMember;
+                if ( tempOfText >= tempMessage.Length )
                 {
                     isWritin = false;
+                    PrefsManager.AutoSave( );
                     return;
                 }
             }
         }
     }
-    public static void StartDialogueStatic ( DialogueMessages message )
+    public static void StartDialogueStatic ( int message )
     {
         Instance.StartDialogue(message);
     }
     public void ContinueDialogue ( )
     {
-        if(OzgursMessages.Index<OzgursMessages.Messages.Count)
-        {
-            timer = 0;
-            OzgursMessages.Index++;
-            isWritin = true;
-        }
-        else
-        {
-            textBox.SetActive(false);
-            dialogueText.text = string.Empty;
-            return;
-        }
+        StartDialogue(EventManager.SessionNumber);
     }
-    private void StartDialogue ( DialogueMessages messages )
+    private void StartDialogue ( int messages )
     {
-        if(messages.Index < messages.Messages.Count )
+        if ( Dialogues[messages].Index < Dialogues[messages].Messages.Count )
         {
-            textBox.SetActive(true);
-            messages.Index++;
+            DialogueBox.SetActive(true);
+            tempMessage = Dialogues[messages].Messages[Dialogues[messages].Index];
+            tempMember = Dialogues[messages].owners[Dialogues[messages].Index].ToString( );
+            Dialogues[messages].Index++;
+            tempOfText = 0;
+            timer = 0;
             isWritin = true;
         }
         else
         {
-            textBox.SetActive(false);
+            DialogueBox.SetActive(false);
             tempMessage = string.Empty;
             dialogueText.text = string.Empty;
+            PrefsManager.AutoSave( );
+            PlayerMovement.SetMovelable(true);
+            EventManager.SessionNumber++;
             return;
         }
     }
