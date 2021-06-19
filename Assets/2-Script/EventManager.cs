@@ -10,7 +10,7 @@ public class EventManager : MonoBehaviour
 
     public static int SessionNumber { get => _SessionNumber; set => _SessionNumber = value; }
 
-    private void Awake ( )
+    private void Awake( )
     {
         Instance = this;
         GameIsLive = true;

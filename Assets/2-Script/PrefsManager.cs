@@ -9,7 +9,12 @@ public class PrefsManager : MonoBehaviour
 
     public Prefs prefs;
 
-    private void Awake ( )
+    public delegate void PrefsGate( );
+    public static PrefsGate OnLoaded;
+    public static PrefsGate OnSaved;
+    public static PrefsGate OnStart;
+
+    private void Awake( )
     {
         if ( Instance == null )
         {
@@ -21,23 +26,26 @@ public class PrefsManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void Start ( )
+    public void StartUp( )
     {
         InitializePrefs( );
-        isInitialized = PlayerPrefs.HasKey("GameSession");
-        Load( );
+        ApplyPrefs( );
 
+        isInitialized = PlayerPrefs.HasKey("GameSession");
+        
+        if ( OnStart != null )
+            OnStart( );
     }
-    public static void AutoSave ( )
+    public static void AutoSave( )
     {
         Instance.Save( );
         isInitialized = PlayerPrefs.HasKey("PosX");
     }
-    public static void Load ( )
+    public static void Load( )
     {
         Instance.ApplyPrefs( );
     }
-    private void Save ( )
+    private void Save( )
     {
         PlayerPrefs.SetInt("GameSession", EventManager.SessionNumber);
         prefs.CurrentSession = PlayerPrefs.GetInt("GameSession");
@@ -60,8 +68,11 @@ public class PrefsManager : MonoBehaviour
                                        PlayerPrefs.GetFloat("RotY"),
                                        PlayerPrefs.GetFloat("RotZ"),
                                        PlayerPrefs.GetFloat("RotW"));
+
+        if ( OnSaved != null )
+            OnSaved( );
     }
-    private void InitializePrefs ( )
+    private void InitializePrefs( )
     {
         prefs = new Prefs( );
         if ( !PlayerPrefs.HasKey("GameSession") )
@@ -110,12 +121,47 @@ public class PrefsManager : MonoBehaviour
                                            PlayerPrefs.GetFloat("RotZ"),
                                            PlayerPrefs.GetFloat("RotW"));
         }
+
+        if ( PlayerPrefs.HasKey("Slot1") )
+        {
+            prefs.InvSlot1 = PlayerPrefs.GetInt("Slot1");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Slot1", 0);
+            prefs.InvSlot1 = 0;
+        }
+
+        if ( PlayerPrefs.HasKey("Slot2") )
+        {
+            prefs.InvSlot2 = PlayerPrefs.GetInt("Slot2");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Slot2", 0);
+            prefs.InvSlot2 = 0;
+        }
+
+        if ( PlayerPrefs.HasKey("Slot3") )
+        {
+            prefs.InvSlot3 = PlayerPrefs.GetInt("Slot3");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Slot3", 0);
+            prefs.InvSlot3 = 0;
+        }
     }
-    private void ApplyPrefs ( )
+    private void ApplyPrefs( )
     {
         PlayerMovement.Position = prefs.lastPos;
         PlayerMovement.Rotation = prefs.lastRot;
         EventManager.SessionNumber = prefs.CurrentSession;
+        InventoryManagement.Instance.Slot1Count = prefs.InvSlot1;
+        InventoryManagement.Instance.Slot2Count = prefs.InvSlot2;
+        InventoryManagement.Instance.Slot3Count = prefs.InvSlot3;
+        if ( OnLoaded != null )
+            OnLoaded( );
     }
 }
 
@@ -124,4 +170,5 @@ public class Prefs
     public int CurrentSession;
     public Vector3 lastPos;
     public Quaternion lastRot;
+    public int InvSlot1, InvSlot2, InvSlot3;
 }

@@ -29,18 +29,18 @@ public class PlayerMovement : MonoBehaviour
 
     private bool temp = true;
 
-    private void Awake ( )
+    private void Awake( )
     {
         Instance = this;
     }
-    void Start ( )
+    void Start( )
     {
         _anim = GetComponent<Animator>( );
         _isGround = true;
         canMove = true;
     }
 
-    public void Update ( )
+    public void Update( )
     {
         if ( !canMove )
             return;
@@ -73,13 +73,13 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(waitandjump( ));
         }
     }
-    IEnumerator waitandjump ( )
+    IEnumerator waitandjump( )
     {
         yield return new WaitForSeconds(1.5f);
         _isGround = true;
         _anim.SetBool("isJump", false);
     }
-    private void OnTriggerEnter ( Collider other )
+    private void OnTriggerEnter( Collider other )
     {
         if ( other.gameObject.tag == "Touch" )
         {
@@ -97,8 +97,20 @@ public class PlayerMovement : MonoBehaviour
             temp = false;
             StartCoroutine(tempDelay( ));
         }
+        else if ( other.CompareTag("Wood") )
+        {
+
+        }
+        else if ( other.CompareTag("Lumber") )
+        {
+
+        }
+        else if ( other.CompareTag("Eggs") )
+        {
+
+        }
     }
-    public static void SetMovelable ( bool state )
+    public static void SetMovelable( bool state )
     {
         Instance.canMove = state;
         EventManager.GameIsLive = state;
@@ -111,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
             Cursor.lockState = CursorLockMode.Confined;
         }
     }
-    public IEnumerator tempDelay ( )
+    public IEnumerator tempDelay( )
     {
         yield return new WaitForSeconds(5f);
         temp = true;
