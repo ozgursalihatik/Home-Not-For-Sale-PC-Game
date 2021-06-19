@@ -8,6 +8,7 @@ TagManager:
   - Touch
   - interactable1
   - Grandpa
+  - Axe
   layers:
   - Default
   - TransparentFX

@@ -25,6 +25,7 @@ public class PrefsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        StartUp( );
     }
     public void StartUp( )
     {
@@ -32,7 +33,7 @@ public class PrefsManager : MonoBehaviour
         ApplyPrefs( );
 
         isInitialized = PlayerPrefs.HasKey("GameSession");
-        
+
         if ( OnStart != null )
             OnStart( );
     }
@@ -49,7 +50,6 @@ public class PrefsManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("GameSession", EventManager.SessionNumber);
         prefs.CurrentSession = PlayerPrefs.GetInt("GameSession");
-
 
         PlayerPrefs.SetFloat("PosX", PlayerMovement.Position.x);
         PlayerPrefs.SetFloat("PosY", PlayerMovement.Position.y);
@@ -69,20 +69,31 @@ public class PrefsManager : MonoBehaviour
                                        PlayerPrefs.GetFloat("RotZ"),
                                        PlayerPrefs.GetFloat("RotW"));
 
+        PlayerPrefs.SetInt("Slot1", InventoryManagement.Instance.Slot1Count);
+        prefs.InvSlot1 = PlayerPrefs.GetInt("Slot1");
+
+        PlayerPrefs.SetInt("Slot2", InventoryManagement.Instance.Slot2Count);
+        prefs.InvSlot2 = PlayerPrefs.GetInt("Slot2");
+
+        PlayerPrefs.SetInt("Slot3", InventoryManagement.Instance.Slot3Count);
+        prefs.InvSlot3 = PlayerPrefs.GetInt("Slot3");
+
+        PlayerPrefs.Save( );
+
         if ( OnSaved != null )
             OnSaved( );
     }
     private void InitializePrefs( )
     {
         prefs = new Prefs( );
-        if ( !PlayerPrefs.HasKey("GameSession") )
+        if ( PlayerPrefs.HasKey("GameSession") )
         {
-            prefs.CurrentSession = 0;
-            PlayerPrefs.SetInt("GameSession", 0);
+            prefs.CurrentSession = PlayerPrefs.GetInt("GameSession");
         }
         else
         {
-            prefs.CurrentSession = PlayerPrefs.GetInt("GameSession");
+            prefs.CurrentSession = 0;
+            PlayerPrefs.SetInt("GameSession", 0);
         }
 
         if ( PlayerPrefs.HasKey("PosX") )
