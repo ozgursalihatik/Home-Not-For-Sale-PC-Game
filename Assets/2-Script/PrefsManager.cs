@@ -10,21 +10,18 @@ public class PrefsManager : MonoBehaviour
     public Prefs prefs;
 
     public delegate void PrefsGate( );
+    public static PrefsGate OnAwake;
     public static PrefsGate OnLoaded;
     public static PrefsGate OnSaved;
     public static PrefsGate OnStart;
 
     private void Awake( )
     {
-        if ( Instance == null )
-        {
-            Instance = this;
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
+
+        if ( OnAwake != null )
+            OnAwake( );
+
         StartUp( );
     }
     public void StartUp( )

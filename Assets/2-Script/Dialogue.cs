@@ -18,17 +18,17 @@ public class Dialogue : MonoBehaviour
     private int tempOfText;
     private float timer;
     private bool isWritin;
-    private void Awake ( )
+    private void Awake( )
     {
         Instance = this;
     }
-    void Start ( )
+    void Start( )
     {
         DialogueBox.SetActive(false);
         dialogueText.text = string.Empty;
         Application.targetFrameRate = 60;
     }
-    private void Update ( )
+    private void Update( )
     {
         if ( isWritin )
         {
@@ -48,15 +48,19 @@ public class Dialogue : MonoBehaviour
             }
         }
     }
-    public static void StartDialogueStatic ( int message )
+    public static void StartDialogueStatic( int message )
     {
         Instance.StartDialogue(message);
     }
-    public void ContinueDialogue ( )
+    public static DialogueMessages GetCurrentMessage( )
+    {
+        return Instance.Dialogues[EventManager.SessionNumber];
+    }
+    public void ContinueDialogue( )
     {
         StartDialogue(EventManager.SessionNumber);
     }
-    private void StartDialogue ( int messages )
+    private void StartDialogue( int messages )
     {
         if ( Dialogues[messages].Index < Dialogues[messages].Messages.Count )
         {

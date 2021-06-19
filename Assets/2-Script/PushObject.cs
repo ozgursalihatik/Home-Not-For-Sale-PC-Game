@@ -16,12 +16,6 @@ public class PushObject : MonoBehaviour
         _rg = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Player")

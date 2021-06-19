@@ -9,6 +9,9 @@ TagManager:
   - interactable1
   - Grandpa
   - Axe
+  - Wood
+  - Eggs
+  - Plank
   layers:
   - Default
   - TransparentFX

@@ -28,6 +28,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public bool canMove;
 
     private bool temp = true;
+    private void OnEnable( )
+    {
+        PrefsManager.OnAwake += Awake;
+    }
 
     private void Awake( )
     {
@@ -88,20 +92,30 @@ public class PlayerMovement : MonoBehaviour
 
         if ( other.gameObject.TryGetComponent(out Member member) && temp && EventManager.SessionNumber <= 0 )
         {
-            PrefsManager.AutoSave( );
-            Dialogue.StartDialogueStatic(member.MemberIndex);
-            EventManager.SessionNumber = 0;
-            canMove = false;
-            EventManager.GameIsLive = false;
-            Cursor.lockState = CursorLockMode.Confined;
-            temp = false;
-            StartCoroutine(tempDelay( ));
+            DialogueMessages scriptable = Dialogue.GetCurrentMessage( );
+            if ( scriptable.Index >= scriptable.Messages.Count )
+            {
+                StartCoroutine(tempDelay( ));
+                return;
+            }
+            else
+            {
+                PrefsManager.AutoSave( );
+                Dialogue.StartDialogueStatic(member.MemberIndex);
+                EventManager.SessionNumber = 0;
+                canMove = false;
+                EventManager.GameIsLive = false;
+                Cursor.lockState = CursorLockMode.Confined;
+                temp = false;
+                StartCoroutine(tempDelay( ));
+                return;
+            }
         }
         else if ( other.CompareTag("Wood") )
         {
 
         }
-        else if ( other.CompareTag("Lumber") )
+        else if ( other.CompareTag("Plank") )
         {
 
         }
