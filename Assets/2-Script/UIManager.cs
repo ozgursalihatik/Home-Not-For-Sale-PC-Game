@@ -9,9 +9,10 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    public GameObject Settings, InventoryEnv;
+    public GameObject Settings, InventoryEnv, QuestInfo;
     public GameObject InvSlot1, InvSlot2, InvSlot3;
-    public TMP_Text InvSlot1Counter, InvSlot2Counter, InvSlot3Counter;
+    public TMP_Text InvSlot1Counter, InvSlot2Counter, InvSlot3Counter,
+        QuestInfoText;
 
     private CursorLockMode tempLock;
     private bool tempLive;
@@ -35,6 +36,32 @@ public class UIManager : MonoBehaviour
             PlayerMovement.Instance.canMove = false;
         }
     }
+
+    public void ReleaseInfo( )
+    {
+        switch ( EventManager.SessionNumber )
+        {
+            case 0:
+                QuestInfoText.text = "Görev: Deden ile selamlaþ ve tatilin baþlasýn!";
+                break;
+            case 1:
+                QuestInfoText.text = "Görev: Dedenin istediði çekici bul ve dedene geri götür.";
+                break;
+            case 2:
+                QuestInfoText.text = "Görev:";
+                break;
+            case 3:
+                QuestInfoText.text = "Görev:";
+                break;
+            case 4:
+                QuestInfoText.text = "Görev:";
+                break;
+            case 5:
+                QuestInfoText.text = "Görev:";
+                break;
+        }
+    }
+
     public void SettingsTrigger( )
     {
         Cursor.lockState = tempLock;

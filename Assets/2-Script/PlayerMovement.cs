@@ -89,26 +89,31 @@ public class PlayerMovement : MonoBehaviour
         {
             _anim.SetBool("inTouch", true);
         }
+        Member member;
 
-        if ( other.gameObject.TryGetComponent(out Member member) && temp && EventManager.SessionNumber <= 0 )
+        if ( other.gameObject.TryGetComponent(out member) && temp )
         {
-            DialogueMessages scriptable = Dialogue.GetCurrentMessage( );
-            if ( scriptable.Index >= scriptable.Messages.Count )
+            if ( member.MemberIndex == EventManager.SessionNumber )
             {
-                StartCoroutine(tempDelay( ));
-                return;
-            }
-            else
-            {
-                PrefsManager.AutoSave( );
-                Dialogue.StartDialogueStatic(member.MemberIndex);
-                EventManager.SessionNumber = 0;
-                canMove = false;
-                EventManager.GameIsLive = false;
-                Cursor.lockState = CursorLockMode.Confined;
-                temp = false;
-                StartCoroutine(tempDelay( ));
-                return;
+                DialogueMessages scriptable = Dialogue.GetCurrentMessage( );
+                if ( scriptable.Index >= scriptable.Messages.Count )
+                {
+                    StartCoroutine(tempDelay( ));
+                    return;
+                }
+                else
+                {
+                    PrefsManager.AutoSave( );
+                    Dialogue.StartDialogueStatic(member.MemberIndex, member);
+                    _anim.SetBool("isRun", false);
+                    _anim.SetBool("isJump", false);
+                    canMove = false;
+                    EventManager.GameIsLive = false;
+                    Cursor.lockState = CursorLockMode.Confined;
+                    temp = false;
+                    StartCoroutine(tempDelay( ));
+                    return;
+                }
             }
         }
         else if ( other.CompareTag("Wood") )

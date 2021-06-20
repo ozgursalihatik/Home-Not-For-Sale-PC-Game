@@ -18,6 +18,10 @@ public class Dialogue : MonoBehaviour
     private int tempOfText;
     private float timer;
     private bool isWritin;
+
+    Member tmp_Member;
+    int messageIndex;
+
     private void Awake( )
     {
         Instance = this;
@@ -48,9 +52,11 @@ public class Dialogue : MonoBehaviour
             }
         }
     }
-    public static void StartDialogueStatic( int message )
+    public static void StartDialogueStatic( int message, Member member )
     {
-        Instance.StartDialogue(message);
+        Instance.StartDialogue(message, member);
+        Instance.tmp_Member = member;
+        Instance.messageIndex = message;
     }
     public static DialogueMessages GetCurrentMessage( )
     {
@@ -58,9 +64,9 @@ public class Dialogue : MonoBehaviour
     }
     public void ContinueDialogue( )
     {
-        StartDialogue(EventManager.SessionNumber);
+        StartDialogue(messageIndex, tmp_Member);
     }
-    private void StartDialogue( int messages )
+    private void StartDialogue( int messages, Member member )
     {
         if ( Dialogues[messages].Index < Dialogues[messages].Messages.Count )
         {
@@ -71,9 +77,11 @@ public class Dialogue : MonoBehaviour
             tempOfText = 0;
             timer = 0;
             isWritin = true;
+            return;
         }
         else
         {
+            EventManager.SessionNumber = member.MemberIndex + 1;
             DialogueBox.SetActive(false);
             tempMessage = string.Empty;
             dialogueText.text = string.Empty;
