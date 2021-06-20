@@ -8,17 +8,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public Transform Hala, Dede;
-    public GameObject Balta, BahceKapi, GarajKapi, KumesKapi, Planks1, Planks2, Eggs;
+    public GameObject Balta, BahceKapi, GarajKapi, KumesKapi, Planks1, Planks2, Eggs, Trashes;
 
     public Vector3 BaltaTargetPos;
     public Vector3 DedeFirsPos, DedeFirstRot, DedeSecondRot;
     public Vector3 HalaFirstPos, HalaFirstRot;
     public Vector3 HalaSecondPos, HalaSecondRot;
 
-    private void Start( )
-    {
-
-    }
     public void BaltaPositionChange( )
     {
         Balta.transform.position = new Vector3(176.173f, 2.078f, 140.788f);
@@ -52,10 +48,13 @@ public class GameManager : MonoBehaviour
     public void BahceKapisiAcilsin( )
     {
         BahceKapi.SetActive(false);
+        Planks2.SetActive(true);
     }
     public void GarajKapisiAcilsin( )
     {
         GarajKapi.SetActive(false);
+        Planks1.SetActive(true);
+        Trashes.SetActive(true);
     }
     public void KumesKapisiAcilsin( )
     {

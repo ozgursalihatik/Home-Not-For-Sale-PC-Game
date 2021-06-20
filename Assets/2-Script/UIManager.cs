@@ -13,10 +13,12 @@ public class UIManager : MonoBehaviour
     public GameObject InvSlot1, InvSlot2, InvSlot3;
     public TMP_Text InvSlot1Counter, InvSlot2Counter, InvSlot3Counter,
         QuestInfoText;
+    public int RequiredWoods, RequiredPlanks, RequiredEggs, RequiredTrashes;
 
     private CursorLockMode tempLock;
     private bool tempLive;
     private bool tempMove;
+    private GameObject tempObject;
 
     private void Awake( )
     {
@@ -35,6 +37,13 @@ public class UIManager : MonoBehaviour
             tempMove = PlayerMovement.Instance.canMove;
             PlayerMovement.Instance.canMove = false;
         }
+        if ( tempObject != null )
+        {
+            if ( Input.GetKeyDown(KeyCode.E) )
+            {
+                tempObject.SetActive(false);
+            }
+        }
     }
 
     public void ReleaseInfo( )
@@ -45,21 +54,39 @@ public class UIManager : MonoBehaviour
                 QuestInfoText.text = "Görev: Deden ile selamlaþ ve tatilin baþlasýn!";
                 break;
             case 1:
-                QuestInfoText.text = "Görev: Dedenin istediði çekici bul ve dedene geri götür.";
+                QuestInfoText.text = "Görev: Dedenin istediði Tamir Çantasýný bul ve dedene götür.";
                 break;
             case 2:
-                QuestInfoText.text = "Görev:";
+                QuestInfoText.text = "Görev: Balta'yý evin arkasýndaki odun kesme alanýna götür.";
                 break;
             case 3:
-                QuestInfoText.text = "Görev:";
+                QuestInfoText.text = "Görev: Garaja git ve atýlacak þeyleri at.";
                 break;
             case 4:
-                QuestInfoText.text = "Görev:";
+                QuestInfoText.text = "Görev: Bahçe kapýsýný tamir etmek için Odun ve Kereste bul! \n" +
+                    "Toplanacak Odun: " + ( RequiredWoods - InventoryManagement.Instance.Slot1Count ) + "\n" +
+                    "Toplanacak Kereste: " + ( RequiredPlanks - InventoryManagement.Instance.Slot2Count );
                 break;
             case 5:
-                QuestInfoText.text = "Görev:";
+                QuestInfoText.text = "Görev: Kümesin kapýsýný tamir etmek için Odun ve Kereste bul! \n" +
+                    "Toplanacak Odun: " + ( RequiredWoods - InventoryManagement.Instance.Slot1Count ) + "\n" +
+                    "Toplanacak Keresste: " + ( RequiredPlanks - InventoryManagement.Instance.Slot2Count );
+                break;
+            case 6:
+                QuestInfoText.text = "Görev: Tüm çöpleri ve daðýlmýþ yumurtalarý topla ki Deden bu iþle meþgul olmak zorunda kalmasýn! \n" +
+                    "Toplanacak Yumurta: " + ( RequiredEggs - InventoryManagement.Instance.Slot3Count ) + "\n" +
+                    "Toplanacak Çöp: " + ( RequiredTrashes - InventoryManagement.Instance.Slot4Count );
                 break;
         }
+    }
+
+    public void EqquipItem( GameObject item )
+    {
+        tempObject = item;
+    }
+    public void ItemIsFar( )
+    {
+        tempObject = null;
     }
 
     public void SettingsTrigger( )

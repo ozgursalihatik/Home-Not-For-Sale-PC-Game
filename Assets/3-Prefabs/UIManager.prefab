@@ -884,6 +884,18 @@ MonoBehaviour:
   BahceKapi: {fileID: 0}
   GarajKapi: {fileID: 0}
   KumesKapi: {fileID: 0}
+  Planks1: {fileID: 0}
+  Planks2: {fileID: 0}
+  Eggs: {fileID: 0}
+  Trashes: {fileID: 0}
+  BaltaTargetPos: {x: 176.173, y: 2.078, z: 140.788}
+  DedeFirsPos: {x: 118.45, y: 0.45, z: 23.25}
+  DedeFirstRot: {x: 0, y: -120, z: 0}
+  DedeSecondRot: {x: 0, y: 9, z: 0}
+  HalaFirstPos: {x: 119.45, y: 0.33, z: 20.36}
+  HalaFirstRot: {x: 0, y: -172.102, z: 0}
+  HalaSecondPos: {x: 147.61, y: 0.33, z: 118.47}
+  HalaSecondRot: {x: 0, y: -81.045, z: 0}
 --- !u!114 &6638481217659883838
 MonoBehaviour:
   m_ObjectHideFlags: 0

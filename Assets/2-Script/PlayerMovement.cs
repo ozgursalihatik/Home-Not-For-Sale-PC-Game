@@ -128,6 +128,10 @@ public class PlayerMovement : MonoBehaviour
         {
 
         }
+        else if ( other.CompareTag("Trashes") )
+        {
+
+        }
     }
     public static void SetMovelable( bool state )
     {
