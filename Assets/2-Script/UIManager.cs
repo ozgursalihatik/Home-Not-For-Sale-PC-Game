@@ -10,15 +10,121 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public GameObject Settings, InventoryEnv, QuestInfo;
-    public GameObject InvSlot1, InvSlot2, InvSlot3;
-    public TMP_Text InvSlot1Counter, InvSlot2Counter, InvSlot3Counter,
+    public GameObject InvSlot1, InvSlot2, InvSlot3, InvSlot4;
+    public TMP_Text InvSlot1Counter, InvSlot2Counter, InvSlot3Counter, InvSlot4Counter,
         QuestInfoText;
+    public TMP_Text InfoText;
     public int RequiredWoods, RequiredPlanks, RequiredEggs, RequiredTrashes;
+    public int GottenWoods, GottenPlanks, GottenEggs, GottenTrashes;
 
     private CursorLockMode tempLock;
     private bool tempLive;
     private bool tempMove;
+    private bool infotext;
     private GameObject tempObject;
+
+    public static bool WoodsOK( )
+    {
+        return Instance.RequiredWoods == Instance.GottenWoods;
+    }
+    public static bool PlanksOK( )
+    {
+        return Instance.RequiredWoods == Instance.GottenPlanks;
+    }
+    public static bool EggsOK( )
+    {
+        return Instance.RequiredEggs == Instance.GottenEggs;
+    }
+    public static bool TrashesOK( )
+    {
+        return Instance.RequiredTrashes == Instance.GottenTrashes;
+    }
+    /// <summary>
+    /// Sets active or deactive Invetory Slots in UIManager.
+    /// </summary>
+    /// <param name="Inventories">In it, wood, plank and eggs values are searched dictionary variable. </param>
+    public static void SetInventory( Dictionary<string, int> Inventories )
+    {
+        foreach ( var item in Inventories.Keys )
+        {
+            if ( item.Equals("Wood") )
+            {
+                Instance.SetSlot1(Inventories[item]);
+            }
+            else if ( item.Equals("Plank") )
+            {
+                Instance.SetSlot2(Inventories[item]);
+            }
+            else if ( item.Equals("Eggs") )
+            {
+                Instance.SetSlot3(Inventories[item]);
+            }
+            else if ( item.Equals("Trashes") )
+            {
+                Instance.SetSlot4(Inventories[item]);
+            }
+        }
+    }
+    /// <summary>
+    /// It changes the activity value of the given slot. 
+    /// </summary>
+    /// <param name="index">Changing values index</param>
+    /// <param name="value">Value to change</param>
+    public static void SetActiveInventory( int index, bool value )
+    {
+        switch ( index )
+        {
+            case 0:
+                Instance.InvSlot1.SetActive(value);
+                break;
+            case 1:
+                Instance.InvSlot2.SetActive(value);
+                break;
+            case 2:
+                Instance.InvSlot3.SetActive(value);
+                break;
+        }
+        Debug.LogError("Slots Indexes cannot be less than 0 and greater than 2.");
+        return;
+    }
+    public static void ShowObjectInfo( EqqupableObject eqObject )
+    {
+        if ( PlayerMovement.Instance.canMove )
+        {
+            Instance.infotext = true;
+            Instance.InfoText.gameObject.SetActive(true);
+            switch ( eqObject.OnjectsType )
+            {
+                case EqObjectType.OdunKesmeNoktasi:
+                    Instance.InfoText.text = "Baltayý býrakmak için 'E'";
+                    break;
+                case EqObjectType.Odun:
+                    Instance.InfoText.text = "Odunu almak için 'E'";
+                    break;
+                case EqObjectType.Kereste:
+                    Instance.InfoText.text = "Keresteyi almak için 'E'";
+                    break;
+                case EqObjectType.Yumurta:
+                    Instance.InfoText.text = "Yumurtayý almak için 'E'";
+                    break;
+                case EqObjectType.Cop:
+                    Instance.InfoText.text = "Çöpü yerden kaldýrmak için 'E'";
+                    break;
+                case EqObjectType.TamirCantasi:
+                    Instance.InfoText.text = "Tamir Çantasýný almak için 'E'";
+                    break;
+                case EqObjectType.GarajCop:
+                    Instance.InfoText.text = "Daðýnýklýðý temizlemek için 'E'";
+                    break;
+                case EqObjectType.BahceKapisi:
+                    Instance.InfoText.text = "Topladýðýn eþyalarý býrakmak için 'E'";
+                    break;
+                case EqObjectType.KumesKapisi:
+                    Instance.InfoText.text = "Topladýðýn eþyalarý býrakmak için 'E'";
+                    break;
+            }
+        }
+    }
 
     private void Awake( )
     {
@@ -44,8 +150,9 @@ public class UIManager : MonoBehaviour
                 tempObject.SetActive(false);
             }
         }
+        if ( !infotext )
+            InfoText.gameObject.SetActive(false);
     }
-
     public void ReleaseInfo( )
     {
         switch ( EventManager.SessionNumber )
@@ -79,7 +186,6 @@ public class UIManager : MonoBehaviour
                 break;
         }
     }
-
     public void EqquipItem( GameObject item )
     {
         tempObject = item;
@@ -88,7 +194,6 @@ public class UIManager : MonoBehaviour
     {
         tempObject = null;
     }
-
     public void SettingsTrigger( )
     {
         Cursor.lockState = tempLock;
@@ -97,51 +202,6 @@ public class UIManager : MonoBehaviour
         PlayerMovement.Instance.canMove = tempMove;
     }
 
-    /// <summary>
-    /// Sets active or deactive Invetory Slots in UIManager.
-    /// </summary>
-    /// <param name="Inventories">In it, wood, plank and eggs values are searched dictionary variable. </param>
-    public static void SetInventory( Dictionary<string, int> Inventories )
-    {
-        foreach ( var item in Inventories.Keys )
-        {
-            if ( item.Equals("Wood") )
-            {
-                Instance.SetSlot1(Inventories[item]);
-            }
-            else if ( item.Equals("Plank") )
-            {
-                Instance.SetSlot2(Inventories[item]);
-            }
-            else if ( item.Equals("Eggs") )
-            {
-                Instance.SetSlot3(Inventories[item]);
-            }
-        }
-    }
-
-    /// <summary>
-    /// It changes the activity value of the given slot. 
-    /// </summary>
-    /// <param name="index">Changing values index</param>
-    /// <param name="value">Value to change</param>
-    public static void SetActiveInventory( int index, bool value )
-    {
-        switch ( index )
-        {
-            case 0:
-                Instance.InvSlot1.SetActive(value);
-                break;
-            case 1:
-                Instance.InvSlot2.SetActive(value);
-                break;
-            case 2:
-                Instance.InvSlot3.SetActive(value);
-                break;
-        }
-        Debug.LogError("Slots Indexes cannot be less than 0 and greater than 2.");
-        return;
-    }
     public void SetSlot1( int value )
     {
         if ( value > 0 )
@@ -179,6 +239,19 @@ public class UIManager : MonoBehaviour
         {
             InvSlot3Counter.text = string.Empty;
             InventoryManagement.Instance.Slot3Count = 0;
+        }
+    }
+    public void SetSlot4( int value )
+    {
+        if ( value > 0 )
+        {
+            InvSlot4Counter.text = value.ToString( );
+            InventoryManagement.Instance.Slot4Count = value;
+        }
+        else
+        {
+            InvSlot4Counter.text = string.Empty;
+            InventoryManagement.Instance.Slot4Count = 0;
         }
     }
     public void SaveGame( )

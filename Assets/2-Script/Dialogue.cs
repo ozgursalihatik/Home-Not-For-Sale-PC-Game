@@ -39,16 +39,16 @@ public class Dialogue : MonoBehaviour
             timer -= Time.deltaTime;
             if ( timer <= 0 )
             {
-                timer += textDuration;
-                tempOfText++;
-                dialogueText.text = tempMessage.Substring(0, tempOfText);
-                nameText.text = tempMember;
                 if ( tempOfText >= tempMessage.Length )
                 {
                     isWritin = false;
                     PrefsManager.AutoSave( );
                     return;
                 }
+                timer += textDuration;
+                tempOfText++;
+                dialogueText.text = tempMessage.Substring(0, tempOfText);
+                nameText.text = tempMember;
             }
         }
     }
@@ -81,13 +81,13 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            EventManager.SessionNumber = member.MemberIndex + 1;
+            //if ( member.MemberIndex >= 1 )
+            //    EventManager.SessionNumber = member.MemberIndex + 1;
             DialogueBox.SetActive(false);
             tempMessage = string.Empty;
             dialogueText.text = string.Empty;
             PrefsManager.AutoSave( );
             PlayerMovement.SetMovelable(true);
-            EventManager.SessionNumber++;
             return;
         }
     }

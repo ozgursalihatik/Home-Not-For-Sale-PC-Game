@@ -75,6 +75,140 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &333383333563123743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1661861853416579066}
+  - component: {fileID: 8745525543403464225}
+  - component: {fileID: 5429290865890026712}
+  m_Layer: 0
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1661861853416579066
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333383333563123743}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4047336271489814540}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 600, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8745525543403464225
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333383333563123743}
+  m_CullTransparentMesh: 1
+--- !u!114 &5429290865890026712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333383333563123743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: New Text
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &559028084667015330
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,6 +238,7 @@ RectTransform:
   m_Children:
   - {fileID: 7187684368611942363}
   - {fileID: 2276910870130034263}
+  - {fileID: 1661861853416579066}
   m_Father: {fileID: 828867009431050352}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -862,10 +997,21 @@ MonoBehaviour:
   InvSlot1: {fileID: 1126281773214531545}
   InvSlot2: {fileID: 7903021838717383818}
   InvSlot3: {fileID: 779475141569196063}
+  InvSlot4: {fileID: 0}
   InvSlot1Counter: {fileID: 8705201426839833620}
   InvSlot2Counter: {fileID: 600035790326386662}
   InvSlot3Counter: {fileID: 3373877055483553231}
+  InvSlot4Counter: {fileID: 0}
   QuestInfoText: {fileID: 3063740999104450266}
+  InfoText: {fileID: 0}
+  RequiredWoods: 0
+  RequiredPlanks: 0
+  RequiredEggs: 0
+  RequiredTrashes: 0
+  GottenWoods: 0
+  GottenPlanks: 0
+  GottenEggs: 0
+  GottenTrashes: 0
 --- !u!114 &8485821493578952993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,11 +1034,13 @@ MonoBehaviour:
   Planks2: {fileID: 0}
   Eggs: {fileID: 0}
   Trashes: {fileID: 0}
+  Session2Trigger: {fileID: 0}
+  garageTrigger: {fileID: 0}
   BaltaTargetPos: {x: 176.173, y: 2.078, z: 140.788}
   DedeFirsPos: {x: 118.45, y: 0.45, z: 23.25}
   DedeFirstRot: {x: 0, y: -120, z: 0}
   DedeSecondRot: {x: 0, y: 9, z: 0}
-  HalaFirstPos: {x: 119.45, y: 0.33, z: 20.36}
+  HalaFirstPos: {x: 119.45, y: 0.33, z: 28.36}
   HalaFirstRot: {x: 0, y: -172.102, z: 0}
   HalaSecondPos: {x: 147.61, y: 0.33, z: 118.47}
   HalaSecondRot: {x: 0, y: -81.045, z: 0}
@@ -915,6 +1063,7 @@ MonoBehaviour:
   Dialogues:
   - {fileID: 11400000, guid: 3b1bbdcc542a53241837cadbac3b0a9e, type: 2}
   - {fileID: 11400000, guid: c2b8452ac08cdf54a8902cf1c7a33cce, type: 2}
+  - {fileID: 11400000, guid: fbd581bbd82afd94baa7c437e349a43c, type: 2}
   - {fileID: 11400000, guid: 3481805e446bf30469292988c2e83fd9, type: 2}
   - {fileID: 11400000, guid: daa892a5b006f2143b222e352ca57090, type: 2}
   - {fileID: 11400000, guid: 27c3cd7a418eeba4285d07c453734165, type: 2}
@@ -933,9 +1082,11 @@ MonoBehaviour:
   Slot1: {fileID: 1126281773214531545}
   Slot2: {fileID: 7903021838717383818}
   Slot3: {fileID: 779475141569196063}
+  Slot4: {fileID: 0}
   Slot1Count: 0
   Slot2Count: 0
   Slot3Count: 0
+  Slot4Count: 0
 --- !u!1 &828867009798116898
 GameObject:
   m_ObjectHideFlags: 0

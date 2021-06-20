@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: Session 3
   m_EditorClassIdentifier: 
   Messages:
-  - "Evi satacaklar demek. Oysa ben buray\u0131 \xE7ok seviyorum.\u202FOnlar\u0131n\u202Fburay\u0131
-    satmas\u0131n\u0131 nas\u0131l engelleyebilirim."
-  - "Buldum! Buraya bakamad\u0131klar\u0131n\u0131 s\xF6ylemi\u015Flerdi. E\u011Fer;
-    buran\u0131n bak\u0131m\u0131n\u0131 yaparsam b\xF6ylece satmak zorunda kalmazlar."
-  - "\xD6ZG\xDCR! Evin \xF6n\xFCne gelir misin?"
-  owners: 000000000000000002000000
+  - "\xD6zg\xFCr gelmi\u015Fsin. Ne kadar oldu geleli? Yolculuk nas\u0131l ge\xE7ti."
+  - "\u0130yi ge\xE7mi\u015F."
+  - "\u0130yi ge\xE7ti."
+  - "Ben o zaman birazdan gidip yemek haz\u0131rlayay\u0131m. Oturup\u202Fbi'\u202Fyemek
+    yiyelim."
+  - "Tamamd\u0131r. ^^"
+  - "\xD6zg\xFCr senden bir \u015Fey daha isteyebilir miyim?"
+  - Tabii.
+  - "Bah\xE7enin en sonunda baltam olacak onu evin arkas\u0131na getirip odunlar\u0131n\u202Fyan\u0131na\u202Fb\u0131rakabilir\u202Fmisin?"
+  owners: 0200000001000000000000000200000000000000010000000000000001000000
   Index: 0

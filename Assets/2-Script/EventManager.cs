@@ -18,22 +18,31 @@ public class EventManager : MonoBehaviour
             }
             else if ( value == 1 )
             {
-                GameManager.Instance.DedeRotationChange(value);
-                GameManager.Instance.HalaPositionChange(0);
+                GameManager.Instance.DedeRotationChange(0);
+                GameManager.Instance.Session2Trigger.SetActive(false);
+                GameManager.Instance.garageTrigger.SetActive(true);
             }
             else if ( value == 2 )
             {
+                GameManager.Instance.DedeRotationChange(1);
+                GameManager.Instance.HalaPositionChange(0);
+                GameManager.Instance.Session2Trigger.SetActive(true);
+                GameManager.Instance.garageTrigger.SetActive(false);
             }
             else if ( value == 3 )
             {
-                GameManager.Instance.GarajKapisiAcilsin( );
-                GameManager.Instance.HalaPositionChange(1);
+                GameManager.Instance.Session2Trigger.SetActive(false);
             }
             else if ( value == 4 )
             {
-                GameManager.Instance.BahceKapisiAcilsin( );
+                GameManager.Instance.HalaPositionChange(1);
+                GameManager.Instance.GarajKapisiAcilsin( );
             }
             else if ( value == 5 )
+            {
+                GameManager.Instance.BahceKapisiAcilsin( );
+            }
+            else if ( value == 6 )
             {
                 GameManager.Instance.KumesKapisiAcilsin( );
             }
@@ -45,5 +54,9 @@ public class EventManager : MonoBehaviour
     {
         Instance = this;
         GameIsLive = true;
+    }
+    private void Update( )
+    {
+        Debug.Log(SessionNumber);
     }
 }

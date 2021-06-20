@@ -18,9 +18,10 @@ public class PlayerMovement : MonoBehaviour
     public float _jumpheight = 10f;
 
     private Vector3 velocity;
-    private int SessionNumber { get => EventManager.SessionNumber; }
 
     public Animator _anim;
+
+    public bool AxeIsGotten, FixItBoxGotten;
 
     [SerializeField] bool _isGround;
     [SerializeField] private GameObject _player;
@@ -28,11 +29,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public bool canMove;
 
     private bool temp = true;
+    private int Session1Counter = 0;
+
+
     private void OnEnable( )
     {
         PrefsManager.OnAwake += Awake;
     }
-
     private void Awake( )
     {
         Instance = this;
@@ -93,13 +96,16 @@ public class PlayerMovement : MonoBehaviour
 
         if ( other.gameObject.TryGetComponent(out member) && temp )
         {
+            if ( member.MemberIndex == 1 || member.MemberIndex == 2 || member.MemberIndex == 3 )
+            {
+                EventManager.SessionNumber = member.MemberIndex;
+            }
             if ( member.MemberIndex == EventManager.SessionNumber )
             {
                 DialogueMessages scriptable = Dialogue.GetCurrentMessage( );
                 if ( scriptable.Index >= scriptable.Messages.Count )
                 {
                     StartCoroutine(tempDelay( ));
-                    return;
                 }
                 else
                 {
@@ -112,7 +118,28 @@ public class PlayerMovement : MonoBehaviour
                     Cursor.lockState = CursorLockMode.Confined;
                     temp = false;
                     StartCoroutine(tempDelay( ));
-                    return;
+                }
+                switch ( member.MemberIndex )
+                {
+                    case 0:
+                        EventManager.SessionNumber = 1;
+                        break;
+                    case 1:
+                        EventManager.SessionNumber = 2;
+                        break;
+                    case 2:
+                        EventManager.SessionNumber = 3;
+                        break;
+                    case 3:
+                        EventManager.SessionNumber = 4;
+                        break;
+                    case 4:
+                        EventManager.SessionNumber = 5;
+                        other.gameObject.SetActive(false);
+                        break;
+                    case 5:
+                        EventManager.SessionNumber = 6;
+                        break;
                 }
             }
         }

@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Session 4
   m_EditorClassIdentifier: 
   Messages:
-  - "Oyun oynamaya dalmadan \xF6nce deden garaj\u0131n kapal\u0131 kap\u0131s\u0131n\u0131
-    a\xE7m\u0131\u015Ft\u0131r oray\u0131 toparlar m\u0131s\u0131n biraz?"
-  - Elbette.
-  owners: 0200000000000000
+  - "Evi satacaklar demek. Oysa ben buray\u0131 \xE7ok seviyorum.\u202F"
+  - "Onlar\u0131n\u202Fburay\u0131 satmas\u0131n\u0131 nas\u0131l engelleyebilirim."
+  - "Buldum! Buraya bakamad\u0131klar\u0131n\u0131 s\xF6ylemi\u015Flerdi. "
+  - "E\u011Fer; buran\u0131n bak\u0131m\u0131n\u0131 yaparsam b\xF6ylece satmak zorunda
+    kalmazlar."
+  owners: 00000000000000000000000000000000
   Index: 0

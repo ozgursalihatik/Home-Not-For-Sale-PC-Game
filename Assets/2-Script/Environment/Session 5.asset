@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Session 5
   m_EditorClassIdentifier: 
   Messages:
-  - "Bu \xE7ok \u015Feyi neden yapt\u0131n? Neredeyse her yeri tamir etmi\u015F ve
-    t\xFCm \xE7\xF6pleri\u202Ftoplam\u0131s\u015F\u0131n. Ellerine sa\u011Fl\u0131k."
-  - "Ne demek babaanne. Art\u0131k buran\u0131n bir s\xFCreli\u011Fine daha sizin
-    bak\u0131m\u0131n\u0131za ihtiyac\u0131 yok. Satma plan\u0131n\u0131zdan vazge\xE7mi\u015Fsinizdir."
-  - "Biz evi satm\u0131yoruz ki arabay\u0131 sat\u0131yoruz."
-  owners: 020000000000000002000000
+  - "\xD6ZG\xDC\xDC\xDCR! "
+  - "Oyun oynamaya dalmadan \xF6nce deden garaj\u0131n kapal\u0131 kap\u0131s\u0131n\u0131
+    a\xE7m\u0131\u015Ft\u0131r oray\u0131 toparlar m\u0131s\u0131n biraz?"
+  - Elbette Halaa!
+  owners: 020000000200000000000000
   Index: 0

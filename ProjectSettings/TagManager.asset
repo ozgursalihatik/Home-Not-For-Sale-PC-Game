@@ -12,6 +12,8 @@ TagManager:
   - Wood
   - Eggs
   - Plank
+  - FixinBox
+  - Trashes
   layers:
   - Default
   - TransparentFX

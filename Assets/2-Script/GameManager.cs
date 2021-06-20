@@ -8,13 +8,20 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public Transform Hala, Dede;
-    public GameObject Balta, BahceKapi, GarajKapi, KumesKapi, Planks1, Planks2, Eggs, Trashes;
+    public GameObject Balta, BahceKapi, GarajKapi, KumesKapi, Planks1, Planks2, Eggs, Trashes,
+        Session2Trigger, garageTrigger;
 
     public Vector3 BaltaTargetPos;
     public Vector3 DedeFirsPos, DedeFirstRot, DedeSecondRot;
     public Vector3 HalaFirstPos, HalaFirstRot;
     public Vector3 HalaSecondPos, HalaSecondRot;
 
+    private void Awake( )
+    {
+        Instance = this;
+        Session2Trigger.SetActive(false);
+        garageTrigger.SetActive(false);
+    }
     public void BaltaPositionChange( )
     {
         Balta.transform.position = new Vector3(176.173f, 2.078f, 140.788f);
@@ -29,6 +36,7 @@ public class GameManager : MonoBehaviour
         else if ( index == 1 )
         {
             Dede.rotation = Quaternion.Euler(DedeSecondRot);
+            Dede.GetComponent<Animator>( ).SetBool("Talking1", true);
         }
     }
     public void HalaPositionChange( int index )
@@ -41,8 +49,10 @@ public class GameManager : MonoBehaviour
         }
         else if ( index == 1 )
         {
+            Hala.gameObject.SetActive(true);
             Hala.position = HalaSecondPos;
             Hala.rotation = Quaternion.Euler(HalaSecondRot);
+            Hala.GetComponent<Animator>( ).SetBool("Talking1", true);
         }
     }
     public void BahceKapisiAcilsin( )
