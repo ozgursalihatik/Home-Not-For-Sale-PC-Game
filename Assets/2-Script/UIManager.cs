@@ -23,6 +23,13 @@ public class UIManager : MonoBehaviour
     private bool infotext;
     private GameObject tempObject;
 
+    public static void SendMessageBox( string message )
+    {
+        Instance.InfoText.gameObject.SetActive(true);
+        Instance.infotext = true;
+        Instance.InfoText.text = message;
+        Instance.StartCoroutine(Instance.infoDelay(1));
+    }
     public static bool WoodsOK( )
     {
         return Instance.RequiredWoods == Instance.GottenWoods;
@@ -265,5 +272,10 @@ public class UIManager : MonoBehaviour
     public void QuitGame( )
     {
         Application.Quit( );
+    }
+    private IEnumerator infoDelay( int delay )
+    {
+        yield return new WaitForSeconds(delay);
+        infotext = false;
     }
 }

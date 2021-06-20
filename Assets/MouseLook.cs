@@ -46,6 +46,8 @@ public class MouseLook : MonoBehaviour
                         case EqObjectType.OdunKesmeNoktasi:
                             if ( PlayerMovement.Instance.AxeIsGotten )
                                 GameManager.Instance.BaltaPositionChange( );
+                            else
+                                UIManager.SendMessageBox("Baltayý almazsan odun toplayamazsýn.");
                             break;
                         case EqObjectType.Odun:
                             item.SetActive(false);
@@ -81,8 +83,6 @@ public class MouseLook : MonoBehaviour
                         case EqObjectType.KumesKapisi:
                             if ( UIManager.WoodsOK( ) && UIManager.PlanksOK( ) )
                                 item.SetActive(false);
-                            break;
-                        default:
                             break;
                     }
                 }
