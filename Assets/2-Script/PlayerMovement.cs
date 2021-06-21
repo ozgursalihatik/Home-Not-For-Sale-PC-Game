@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     public float _gravity = -9.81f;
     public float _jumpheight = 10f;
 
+    public int QuestIndex = 0;
+
     private Vector3 velocity;
 
     public Animator _anim;
@@ -29,8 +31,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public bool canMove;
 
     private bool temp = true;
-    private int Session1Counter = 0;
-
 
     private void OnEnable( )
     {
@@ -92,13 +92,15 @@ public class PlayerMovement : MonoBehaviour
         {
             _anim.SetBool("inTouch", true);
         }
+
         Member member;
 
         if ( other.gameObject.TryGetComponent(out member) && temp )
         {
-            if ( member.MemberIndex == 1 || member.MemberIndex == 2 || member.MemberIndex == 3 )
+            if ( member.MemberIndex == 1 || member.MemberIndex == 2 || member.MemberIndex == 3 && !( member.MemberIndex > 3 ) )
             {
                 EventManager.SessionNumber = member.MemberIndex;
+                QuestIndex = member.MemberIndex;
             }
             if ( member.MemberIndex == EventManager.SessionNumber )
             {
@@ -134,30 +136,12 @@ public class PlayerMovement : MonoBehaviour
                         EventManager.SessionNumber = 4;
                         break;
                     case 4:
-                        EventManager.SessionNumber = 5;
-                        other.gameObject.SetActive(false);
                         break;
                     case 5:
                         EventManager.SessionNumber = 6;
                         break;
                 }
             }
-        }
-        else if ( other.CompareTag("Wood") )
-        {
-
-        }
-        else if ( other.CompareTag("Plank") )
-        {
-
-        }
-        else if ( other.CompareTag("Eggs") )
-        {
-
-        }
-        else if ( other.CompareTag("Trashes") )
-        {
-
         }
     }
     public static void SetMovelable( bool state )

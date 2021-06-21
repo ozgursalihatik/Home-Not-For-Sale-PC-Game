@@ -72,63 +72,53 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-    /// <summary>
-    /// It changes the activity value of the given slot. 
-    /// </summary>
-    /// <param name="index">Changing values index</param>
-    /// <param name="value">Value to change</param>
-    public static void SetActiveInventory( int index, bool value )
-    {
-        switch ( index )
-        {
-            case 0:
-                Instance.InvSlot1.SetActive(value);
-                break;
-            case 1:
-                Instance.InvSlot2.SetActive(value);
-                break;
-            case 2:
-                Instance.InvSlot3.SetActive(value);
-                break;
-        }
-        Debug.LogError("Slots Indexes cannot be less than 0 and greater than 2.");
-        return;
-    }
     public static void ShowObjectInfo( EqqupableObject eqObject )
     {
         if ( PlayerMovement.Instance.canMove )
         {
-            Instance.infotext = true;
             Instance.InfoText.gameObject.SetActive(true);
             switch ( eqObject.OnjectsType )
             {
                 case EqObjectType.OdunKesmeNoktasi:
+                    Instance.infotext = true;
                     Instance.InfoText.text = "Baltayý býrakmak için 'E'";
-                    break;
+                    return;
                 case EqObjectType.Odun:
+                    Instance.infotext = true;
                     Instance.InfoText.text = "Odunu almak için 'E'";
-                    break;
+                    return;
                 case EqObjectType.Kereste:
+                    Instance.infotext = true;
                     Instance.InfoText.text = "Keresteyi almak için 'E'";
-                    break;
+                    return;
                 case EqObjectType.Yumurta:
+                    Instance.infotext = true;
                     Instance.InfoText.text = "Yumurtayý almak için 'E'";
-                    break;
+                    return;
                 case EqObjectType.Cop:
+                    Instance.infotext = true;
                     Instance.InfoText.text = "Çöpü yerden kaldýrmak için 'E'";
-                    break;
+                    return;
                 case EqObjectType.TamirCantasi:
+                    Instance.infotext = true;
                     Instance.InfoText.text = "Tamir Çantasýný almak için 'E'";
-                    break;
+                    return;
                 case EqObjectType.GarajCop:
+                    Instance.infotext = true;
                     Instance.InfoText.text = "Daðýnýklýðý temizlemek için 'E'";
-                    break;
+                    return;
                 case EqObjectType.BahceKapisi:
+                    Instance.infotext = true;
                     Instance.InfoText.text = "Topladýðýn eþyalarý býrakmak için 'E'";
-                    break;
+                    return;
                 case EqObjectType.KumesKapisi:
+                    Instance.infotext = true;
                     Instance.InfoText.text = "Topladýðýn eþyalarý býrakmak için 'E'";
-                    break;
+                    return;
+                case EqObjectType.Balta:
+                    Instance.infotext = true;
+                    Instance.InfoText.text = "Baltayý almak için 'E'";
+                    return;
             }
         }
     }
@@ -139,6 +129,7 @@ public class UIManager : MonoBehaviour
     }
     private void Update( )
     {
+        Instance.infotext = false;
         if ( Input.GetKeyDown(KeyCode.Escape) )
         {
             tempLock = new CursorLockMode( );
@@ -149,20 +140,20 @@ public class UIManager : MonoBehaviour
             EventManager.GameIsLive = false;
             tempMove = PlayerMovement.Instance.canMove;
             PlayerMovement.Instance.canMove = false;
+            InventoryEnv.SetActive(false);
+            QuestInfo.SetActive(false);
         }
-        if ( tempObject != null )
-        {
-            if ( Input.GetKeyDown(KeyCode.E) )
-            {
-                tempObject.SetActive(false);
-            }
-        }
+
         if ( !infotext )
             InfoText.gameObject.SetActive(false);
+
+        ReleaseInfo(EventManager.SessionNumber);
     }
-    public void ReleaseInfo( )
+    public void ReleaseInfo( int i )
     {
-        switch ( EventManager.SessionNumber )
+        if ( PlayerMovement.Instance.canMove )
+            QuestInfo.SetActive(true);
+        switch ( i )
         {
             case 0:
                 QuestInfoText.text = "Görev: Deden ile selamlaþ ve tatilin baþlasýn!";
@@ -171,13 +162,13 @@ public class UIManager : MonoBehaviour
                 QuestInfoText.text = "Görev: Dedenin istediði Tamir Çantasýný bul ve dedene götür.";
                 break;
             case 2:
-                QuestInfoText.text = "Görev: Balta'yý evin arkasýndaki odun kesme alanýna götür.";
                 break;
             case 3:
-                QuestInfoText.text = "Görev: Garaja git ve atýlacak þeyleri at.";
+                QuestInfoText.text = "Görev: Balta'yý evin arkasýndaki odun kesme alanýna götür.";
                 break;
             case 4:
-                QuestInfoText.text = "Görev: Bahçe kapýsýný tamir etmek için Odun ve Kereste bul! \n" +
+                QuestInfoText.text = "Görev: Garaja git ve atýlacak þeyleri at. \n" +
+                    " Görev: Bahçe kapýsýný tamir etmek için Odun ve Kereste bul! \n" +
                     "Toplanacak Odun: " + ( RequiredWoods - InventoryManagement.Instance.Slot1Count ) + "\n" +
                     "Toplanacak Kereste: " + ( RequiredPlanks - InventoryManagement.Instance.Slot2Count );
                 break;
@@ -193,20 +184,14 @@ public class UIManager : MonoBehaviour
                 break;
         }
     }
-    public void EqquipItem( GameObject item )
-    {
-        tempObject = item;
-    }
-    public void ItemIsFar( )
-    {
-        tempObject = null;
-    }
     public void SettingsTrigger( )
     {
         Cursor.lockState = tempLock;
         Settings.SetActive(false);
         EventManager.GameIsLive = tempLive;
         PlayerMovement.Instance.canMove = tempMove;
+        InventoryEnv.SetActive(true);
+        QuestInfo.SetActive(true);
     }
 
     public void SetSlot1( int value )

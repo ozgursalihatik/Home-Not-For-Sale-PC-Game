@@ -9,12 +9,13 @@ public class GameManager : MonoBehaviour
 
     public Transform Hala, Dede;
     public GameObject Balta, BahceKapi, GarajKapi, KumesKapi, Planks1, Planks2, Eggs, Trashes,
-        Session2Trigger, garageTrigger;
+        Session2Trigger, garageTrigger, woodObject;
 
     public Vector3 BaltaTargetPos;
     public Vector3 DedeFirsPos, DedeFirstRot, DedeSecondRot;
     public Vector3 HalaFirstPos, HalaFirstRot;
     public Vector3 HalaSecondPos, HalaSecondRot;
+    public bool AxeIsPlaced = false;
 
     private void Awake( )
     {
@@ -24,17 +25,23 @@ public class GameManager : MonoBehaviour
     }
     public void BaltaPositionChange( )
     {
-        Balta.transform.position = new Vector3(176.173f, 2.078f, 140.788f);
-        Balta.transform.rotation = Quaternion.Euler(new Vector3(2.719f, -80.502f, -24.943f));
+        if ( !Balta.activeInHierarchy && EventManager.SessionNumber == 4 )
+        {
+            Balta.SetActive(true);
+            Balta.transform.position = new Vector3(176.173f, 2.078f, 140.788f);
+            Balta.transform.rotation = Quaternion.Euler(new Vector3(2.719f, -80.502f, -24.943f));
+        }
     }
     public void DedeRotationChange( int index )
     {
         if ( index == 0 )
         {
             Dede.rotation = Quaternion.Euler(DedeFirstRot);
+            PlayerMovement.Instance.QuestIndex = 0;
         }
         else if ( index == 1 )
         {
+            PlayerMovement.Instance.QuestIndex = 2;
             Dede.rotation = Quaternion.Euler(DedeSecondRot);
             Dede.GetComponent<Animator>( ).SetBool("Talking1", true);
         }
@@ -57,18 +64,27 @@ public class GameManager : MonoBehaviour
     }
     public void BahceKapisiAcilsin( )
     {
+        EventManager.SessionNumber = 5;
         BahceKapi.SetActive(false);
         Planks2.SetActive(true);
+        Planks1.SetActive(false);
     }
     public void GarajKapisiAcilsin( )
     {
         GarajKapi.SetActive(false);
         Planks1.SetActive(true);
-        Trashes.SetActive(true);
+        Planks2.SetActive(false);
     }
     public void KumesKapisiAcilsin( )
     {
         KumesKapi.SetActive(false);
         Eggs.SetActive(true);
+        Trashes.SetActive(true);
+        EventManager.SessionNumber = 6;
+    }
+    private IEnumerator WoodDelay( )
+    {
+        yield return new WaitForSeconds(2);
+        woodObject.SetActive(true);
     }
 }

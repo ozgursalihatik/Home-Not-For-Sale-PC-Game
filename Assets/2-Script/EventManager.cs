@@ -15,10 +15,10 @@ public class EventManager : MonoBehaviour
         {
             if ( value == 0 )
             {
+                GameManager.Instance.DedeRotationChange(0);
             }
             else if ( value == 1 )
             {
-                GameManager.Instance.DedeRotationChange(0);
                 GameManager.Instance.Session2Trigger.SetActive(false);
                 GameManager.Instance.garageTrigger.SetActive(true);
             }
@@ -35,15 +35,22 @@ public class EventManager : MonoBehaviour
             }
             else if ( value == 4 )
             {
+                UIManager.Instance.RequiredPlanks = GameManager.Instance.Planks1.transform.childCount;
                 GameManager.Instance.HalaPositionChange(1);
                 GameManager.Instance.GarajKapisiAcilsin( );
             }
             else if ( value == 5 )
             {
-                GameManager.Instance.BahceKapisiAcilsin( );
+                UIManager.Instance.RequiredPlanks = GameManager.Instance.Planks2.transform.childCount;
+                UIManager.Instance.GottenPlanks = 0;
+                UIManager.Instance.GottenWoods = 0;
             }
             else if ( value == 6 )
             {
+                UIManager.Instance.RequiredTrashes = GameManager.Instance.Trashes.transform.childCount;
+                UIManager.Instance.RequiredEggs = GameManager.Instance.Eggs.transform.childCount;
+                UIManager.Instance.GottenEggs = 0;
+                UIManager.Instance.GottenTrashes = 0;
                 GameManager.Instance.KumesKapisiAcilsin( );
             }
             _SessionNumber = value;
@@ -54,9 +61,5 @@ public class EventManager : MonoBehaviour
     {
         Instance = this;
         GameIsLive = true;
-    }
-    private void Update( )
-    {
-        Debug.Log(SessionNumber);
     }
 }
