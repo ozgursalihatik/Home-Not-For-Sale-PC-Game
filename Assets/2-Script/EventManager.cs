@@ -47,11 +47,13 @@ public class EventManager : MonoBehaviour
             }
             else if ( value == 6 )
             {
+                GameManager.Instance.garageTrigger.SetActive(false);
+                GameManager.Instance.Session2Trigger.SetActive(false);
+                GameManager.Instance.baltaTrigger.SetActive(false);
                 UIManager.Instance.RequiredTrashes = GameManager.Instance.Trashes.transform.childCount;
                 UIManager.Instance.RequiredEggs = GameManager.Instance.Eggs.transform.childCount;
                 UIManager.Instance.GottenEggs = 0;
                 UIManager.Instance.GottenTrashes = 0;
-                GameManager.Instance.KumesKapisiAcilsin( );
             }
             _SessionNumber = value;
         }

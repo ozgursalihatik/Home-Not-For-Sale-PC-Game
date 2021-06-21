@@ -53,30 +53,39 @@ public class MouseLook : MonoBehaviour
                             }
                             else
                             {
-                                InventoryManagement.Instance.SetActiveSlot(0);
-                                InventoryManagement.Instance.Slot1Count++;
-                                UIManager.Instance.GottenWoods++;
-                                Dictionary<string, int> dict1 = new Dictionary<string, int>( );
-                                dict1.Add("Wood", UIManager.Instance.GottenWoods);
-                                UIManager.SetInventory(dict1);
+                                if ( UIManager.Instance.GottenWoods < UIManager.Instance.RequiredWoods )
+                                {
+                                    InventoryManagement.Instance.SetActiveSlot(0);
+                                    InventoryManagement.Instance.Slot1Count++;
+                                    UIManager.Instance.GottenWoods++;
+                                    Dictionary<string, int> dict1 = new Dictionary<string, int>( );
+                                    dict1.Add("Wood", UIManager.Instance.GottenWoods);
+                                    UIManager.SetInventory(dict1);
+                                }
                             }
                             break;
                         case EqObjectType.Odun:
-                            item.SetActive(false);
-                            InventoryManagement.Instance.SetActiveSlot(0);
-                            InventoryManagement.Instance.Slot1Count++;
-                            UIManager.Instance.GottenWoods++;
-                            Dictionary<string, int> dict2 = new Dictionary<string, int>( );
-                            dict2.Add("Wood", UIManager.Instance.GottenWoods);
-                            UIManager.SetInventory(dict2);
+                            if ( UIManager.Instance.GottenWoods < UIManager.Instance.RequiredWoods )
+                            {
+                                item.SetActive(false);
+                                InventoryManagement.Instance.SetActiveSlot(0);
+                                InventoryManagement.Instance.Slot1Count++;
+                                UIManager.Instance.GottenWoods++;
+                                Dictionary<string, int> dict2 = new Dictionary<string, int>( );
+                                dict2.Add("Wood", UIManager.Instance.GottenWoods);
+                                UIManager.SetInventory(dict2);
+                            }
                             break;
                         case EqObjectType.Kereste:
-                            item.SetActive(false);
-                            InventoryManagement.Instance.SetActiveSlot(1);
-                            InventoryManagement.Instance.Slot2Count++;
-                            UIManager.Instance.GottenPlanks++; Dictionary<string, int> dict3 = new Dictionary<string, int>( );
-                            dict3.Add("Plank", UIManager.Instance.GottenPlanks);
-                            UIManager.SetInventory(dict3);
+                            if ( UIManager.Instance.GottenPlanks < UIManager.Instance.RequiredPlanks )
+                            {
+                                item.SetActive(false);
+                                InventoryManagement.Instance.SetActiveSlot(1);
+                                InventoryManagement.Instance.Slot2Count++;
+                                UIManager.Instance.GottenPlanks++; Dictionary<string, int> dict3 = new Dictionary<string, int>( );
+                                dict3.Add("Plank", UIManager.Instance.GottenPlanks);
+                                UIManager.SetInventory(dict3);
+                            }
                             break;
                         case EqObjectType.Yumurta:
                             item.SetActive(false);
@@ -118,6 +127,8 @@ public class MouseLook : MonoBehaviour
                         case EqObjectType.KumesKapisi:
                             if ( UIManager.WoodsOK( ) && UIManager.PlanksOK( ) )
                             {
+                                EventManager.SessionNumber = 6;
+                                GameManager.Instance.KumesKapisiAcilsin( );
                                 Dictionary<string, int> dict6 = new Dictionary<string, int>( );
                                 dict6.Add("Wood", 0);
                                 dict6.Add("Plank", 0);

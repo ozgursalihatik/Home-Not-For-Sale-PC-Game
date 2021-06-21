@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text InvSlot1Counter, InvSlot2Counter, InvSlot3Counter, InvSlot4Counter,
         QuestInfoText;
     public TMP_Text InfoText;
-    public int RequiredWoods, RequiredPlanks, RequiredEggs, RequiredTrashes;
+    public int RequiredWoods, RequiredPlanks, RequiredEggs = 16, RequiredTrashes = 8;
     public int GottenWoods, GottenPlanks, GottenEggs, GottenTrashes;
 
     private CursorLockMode tempLock;
@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
     }
     public static bool PlanksOK( )
     {
-        return Instance.RequiredWoods == Instance.GottenPlanks;
+        return Instance.RequiredPlanks == Instance.GottenPlanks;
     }
     public static bool EggsOK( )
     {
@@ -193,7 +193,6 @@ public class UIManager : MonoBehaviour
         InventoryEnv.SetActive(true);
         QuestInfo.SetActive(true);
     }
-
     public void SetSlot1( int value )
     {
         if ( value > 0 )

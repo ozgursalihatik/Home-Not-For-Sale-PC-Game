@@ -79,6 +79,10 @@ public class PlayerMovement : MonoBehaviour
             _isGround = false;
             StartCoroutine(waitandjump( ));
         }
+        if ( EventManager.SessionNumber >= 6 && UIManager.EggsOK( ) && UIManager.TrashesOK( ) )
+        {
+            Dialogue.StartDialogueStatic(6, null);
+        }
     }
     IEnumerator waitandjump( )
     {

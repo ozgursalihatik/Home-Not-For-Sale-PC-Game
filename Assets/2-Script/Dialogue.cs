@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Dialogue : MonoBehaviour
 {
@@ -81,13 +82,15 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            //if ( member.MemberIndex >= 1 )
-            //    EventManager.SessionNumber = member.MemberIndex + 1;
             DialogueBox.SetActive(false);
             tempMessage = string.Empty;
             dialogueText.text = string.Empty;
             PrefsManager.AutoSave( );
             PlayerMovement.SetMovelable(true);
+            if ( messages == 6 )
+            {
+                SceneManager.LoadScene(2, LoadSceneMode.Single);
+            }
             return;
         }
     }

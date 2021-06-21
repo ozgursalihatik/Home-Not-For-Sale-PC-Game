@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     public Transform Hala, Dede;
     public GameObject Balta, BahceKapi, GarajKapi, KumesKapi, Planks1, Planks2, Eggs, Trashes,
-        Session2Trigger, garageTrigger, woodObject;
+        Session2Trigger, garageTrigger, woodObject, baltaTrigger;
 
     public Vector3 BaltaTargetPos;
     public Vector3 DedeFirsPos, DedeFirstRot, DedeSecondRot;
@@ -80,7 +80,6 @@ public class GameManager : MonoBehaviour
         KumesKapi.SetActive(false);
         Eggs.SetActive(true);
         Trashes.SetActive(true);
-        EventManager.SessionNumber = 6;
     }
     private IEnumerator WoodDelay( )
     {
