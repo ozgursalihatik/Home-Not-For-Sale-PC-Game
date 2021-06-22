@@ -78,7 +78,6 @@ public class Dialogue : MonoBehaviour
             tempOfText = 0;
             timer = 0;
             isWritin = true;
-            return;
         }
         else
         {
@@ -91,7 +90,6 @@ public class Dialogue : MonoBehaviour
             {
                 SceneManager.LoadScene(2, LoadSceneMode.Single);
             }
-            return;
         }
     }
 }

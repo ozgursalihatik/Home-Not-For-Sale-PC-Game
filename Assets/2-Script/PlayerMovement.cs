@@ -81,7 +81,9 @@ public class PlayerMovement : MonoBehaviour
         }
         if ( EventManager.SessionNumber >= 6 && UIManager.EggsOK( ) && UIManager.TrashesOK( ) )
         {
-            Dialogue.StartDialogueStatic(6, null);
+            Member member = new Member( );
+            member.MemberIndex = 6;
+            Dialogue.StartDialogueStatic(6, member);
         }
     }
     IEnumerator waitandjump( )

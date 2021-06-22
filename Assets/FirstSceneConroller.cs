@@ -7,13 +7,14 @@ using UnityEngine.Video;
 
 public class FirstSceneConroller : MonoBehaviour
 {
-    private void Update( )
+    private bool isPlaying;
+    private void Start( )
     {
-        if ( !GetComponent<VideoPlayer>( ).isPlaying )
-        {
-            SceneManager.LoadScene(1, LoadSceneMode.Single);
-            return;
-        }
+        StartCoroutine(firstDelay( ));
     }
-
+    private IEnumerator firstDelay( )
+    {
+        yield return new WaitForSecondsRealtime((float)GetComponent<VideoPlayer>( ).clip.length);
+        SceneManager.LoadScene(1);
+    }
 }

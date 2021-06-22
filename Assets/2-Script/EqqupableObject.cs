@@ -9,8 +9,10 @@ public class EqqupableObject : MonoBehaviour
 
     private void OnDisable( )
     {
-        if ( OnjectsType == EqObjectType.Odun )
-            GameManager.Instance.StartCoroutine("WoodDelay");
+        if ( GameManager.Instance != null )
+            if ( OnjectsType == EqObjectType.Odun )
+                GameManager.Instance.StartCoroutine("WoodDelay");
+            else return;
         else return;
     }
 }
